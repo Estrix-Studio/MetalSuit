@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Initialize()
     {
-        // Check if running in Editor or on PC
 
         // Initialization code here, if needed
     }
