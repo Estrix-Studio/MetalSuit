@@ -7,8 +7,6 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    private List<Buff> activeBuffs = new List<Buff>();
-    private List<PowerUp> activePowerUps = new List<PowerUp>();
 
     public void Initialize()
     {
@@ -40,29 +38,6 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public void ApplyBuff(Buff buff)
-    {
-        activeBuffs.Add(buff);
-        // Apply buff effects here
-    }
-
-    public void RemoveBuff(Buff buff)
-    {
-        activeBuffs.Remove(buff);
-        // Remove buff effects here
-    }
-
-    public void ActivatePowerUp(PowerUp powerUp)
-    {
-        activePowerUps.Add(powerUp);
-        // Apply power-up effects here
-    }
-
-    public void DeactivatePowerUp(PowerUp powerUp)
-    {
-        activePowerUps.Remove(powerUp);
-        // Remove power-up effects here
-    }
 
     private void Die()
     {
@@ -86,16 +61,4 @@ public class PlayerStatus : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class Buff
-{
-    public string name;
-    // Add any properties or methods related to buffs here
-}
 
-[System.Serializable]
-public class PowerUp
-{
-    public string name;
-    // Add any properties or methods related to power-ups here
-}
