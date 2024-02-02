@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float dashForce = 10f;
-    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashForce = 50f;
+    [SerializeField] private float dashDuration = 0.5f;
     [SerializeField] private float dashCooldown = 0.75f;
 
     private bool isDashing = false;
@@ -69,18 +69,28 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDashing)
         {
-            isDashing = true;
+            // Store the original move speed
+            float originalMoveSpeed = moveSpeed;
 
-            Vector3 dashDestination = transform.position + lastMoveDirection * dashForce;
+            isDashing = true;
 
             float elapsedTime = 0f;
 
             while (elapsedTime < dashDuration)
             {
-                GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(transform.position, dashDestination, elapsedTime / dashDuration));
+                // Calculate the new position based on the dash direction
+                Vector3 newPosition = transform.position + lastMoveDirection * dashForce * Time.fixedDeltaTime;
+
+
+                // Move the player
+                GetComponent<Rigidbody>().MovePosition(newPosition);
+                // Increase elapsed time
                 elapsedTime += Time.fixedDeltaTime;
+
                 yield return null;
             }
+
+            // Restore the original move speed
 
             isDashing = false;
             isDashCooldown = true;
