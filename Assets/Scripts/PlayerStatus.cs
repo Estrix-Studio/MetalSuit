@@ -70,6 +70,20 @@ public class PlayerStatus : MonoBehaviour
         Debug.Log("Player has died!");
         // You may want to add more logic here, such as respawning the player or triggering a game over.
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject.GetComponent<PlayerMovement>().GetIsDashing())
+        {
+            EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
+            if (enemyStatus != null)
+            {
+                // Damage the enemy only once during the dash
+                enemyStatus.TakeDamage(10f); // Adjust the damage amount as needed
+                Debug.Log("Hit!!");
+            }
+        }
+    }
 }
 
 [System.Serializable]

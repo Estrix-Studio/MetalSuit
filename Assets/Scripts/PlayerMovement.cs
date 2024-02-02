@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void CheckForDash()
     {
-        if (Input.GetAxis("Dash") > 0|| attackButton.action.ReadValue<float>() > 0)
+        if ((Input.GetAxis("Dash") > 0|| attackButton.action.ReadValue<float>() > 0) && !isDashCooldown)
         {
             Debug.Log("Attack");
             StartCoroutine(Dash());
@@ -67,11 +67,10 @@ public class PlayerMovement : MonoBehaviour
 
     private System.Collections.IEnumerator Dash()
     {
-        if (!isDashing && !isDashCooldown)
+        if (!isDashing)
         {
             isDashing = true;
 
-            Debug.Log(lastMoveDirection);
             Vector3 dashDestination = transform.position + lastMoveDirection * dashForce;
 
             float elapsedTime = 0f;
@@ -86,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
             isDashCooldown = true;
 
-            // Add cooldown duration (e.g., 3 seconds)
+            // Add cooldown duration
             yield return new WaitForSeconds(dashCooldown);
 
             isDashCooldown = false;
@@ -102,5 +101,10 @@ public class PlayerMovement : MonoBehaviour
     {
         this.leftStick = leftStick;
         this.attackButton = attackButton;
+    }
+
+    public bool GetIsDashing()
+    {
+        return isDashing;
     }
 }
