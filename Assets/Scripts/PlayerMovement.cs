@@ -6,33 +6,36 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 0.75f;
 
-    private Joystick joystick;
     private bool isDashing = false;
     private bool isDashCooldown = false;
-
-    public float dashCooldown = .5f;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
     [SerializeField] private InputActionReference leftStick;
     [SerializeField] private InputActionReference attackButton;
 
-    private void Start()
+    private bool isUsingKeyboard;
+
+    public void Initialize()
     {
-        joystick = FindObjectOfType<Joystick>();
+        // Check if running in Editor or on PC
+
+        // Initialization code here, if needed
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
+        if (leftStick.action.ReadValue<Vector2>() != Vector2.zero)
+            isUsingKeyboard = false;
+        else
+            isUsingKeyboard = true;
+
         if (!isDashing)
         {
-            direction = leftStick.action.ReadValue<Vector2>();
+            direction = isUsingKeyboard ? GetKeyboardInput() : leftStick.action.ReadValue<Vector2>();
             MovePlayer(direction);
-
-            Vector2 keyboardInput = GetKeyboardInput();
-            MovePlayer(keyboardInput);
-
 
             CheckForDash();
         }
@@ -56,13 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void CheckForDash()
     {
-        // Check for dash using joystick
-        //if (attackButton.action.ReadValue<float>() > 0 || Keyboard.current[Key.Space].wasPressedThisFrame)
-        //{
-        //    Debug.Log("Attack");
-        //    StartCoroutine(Dash());
-        //}
-        if(Input.GetAxis("Dash") >0)
+        if (Input.GetAxis("Dash") > 0|| attackButton.action.ReadValue<float>() > 0)
         {
             Debug.Log("Attack");
             StartCoroutine(Dash());
@@ -100,5 +97,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection.normalized;
+    }
+
+    public void SetupMobileInput(InputActionReference leftStick, InputActionReference attackButton)
+    {
+        this.leftStick = leftStick;
+        this.attackButton = attackButton;
     }
 }
