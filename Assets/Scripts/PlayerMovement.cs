@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Joystick joystick;
     private bool isDashing = false;
+    private bool isDashCooldown = false;
+
+    public float dashCooldown = .5f;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
@@ -39,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        float dash = Input.GetAxis("Dash");
         return new Vector2(horizontal, vertical);
     }
 
@@ -53,7 +57,12 @@ public class PlayerMovement : MonoBehaviour
     public void CheckForDash()
     {
         // Check for dash using joystick
-        if (attackButton.action.ReadValue<float>() > 0 || Input.GetKeyDown(KeyCode.Space))
+        //if (attackButton.action.ReadValue<float>() > 0 || Keyboard.current[Key.Space].wasPressedThisFrame)
+        //{
+        //    Debug.Log("Attack");
+        //    StartCoroutine(Dash());
+        //}
+        if(Input.GetAxis("Dash") >0)
         {
             Debug.Log("Attack");
             StartCoroutine(Dash());
@@ -62,10 +71,11 @@ public class PlayerMovement : MonoBehaviour
 
     private System.Collections.IEnumerator Dash()
     {
-        if (direction.magnitude > 0)
+        if (!isDashing && !isDashCooldown)
         {
             isDashing = true;
 
+            Debug.Log(lastMoveDirection);
             Vector3 dashDestination = transform.position + lastMoveDirection * dashForce;
 
             float elapsedTime = 0f;
@@ -78,6 +88,12 @@ public class PlayerMovement : MonoBehaviour
             }
 
             isDashing = false;
+            isDashCooldown = true;
+
+            // Add cooldown duration (e.g., 3 seconds)
+            yield return new WaitForSeconds(dashCooldown);
+
+            isDashCooldown = false;
         }
     }
 
