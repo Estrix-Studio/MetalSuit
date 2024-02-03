@@ -1,0 +1,54 @@
+{
+    "name": "PlayerIA",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "59ffbdde-a149-4a13-ba7a-8fdedeeec9c3",
+            "actions": [
+                {
+                    "name": "Move_IA",
+                    "type": "Value",
+                    "id": "a5e8369f-8e3d-4a46-8fc5-2ec886f91a0f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump_IA",
+                    "type": "Button",
+                    "id": "a42f08e2-9514-47f2-86dc-a53953532ee4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e8942bcf-e238-41de-8521-e847e07f0d30",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move_IA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "623586a3-5ef6-4454-af1b-b4dd91a9fade",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump_IA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
