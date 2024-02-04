@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameUIStateMachine : MonoBehaviour
 {
-    public GameObject playScreen, finishScreen, WinScreen, LoseScreen;
+    public GameObject playScreen, finishBar, WinScreen, LoseScreen;
 
 
 
@@ -16,25 +16,34 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void ChangeToPlayScreen()
     {
-        
+        playScreen.SetActive(true);
+        LoseScreen.SetActive(false);
+        WinScreen.SetActive(false);
 
         
     }
 
-    public void ChangeToFinishScreen()
+    public void AddProgressBar()
     {
-       
+        finishBar.SetActive(true);
+        playScreen.SetActive(true);
+
     }
 
     public void ChangeToWinScreen()
     {
-
-      
+        playScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+        WinScreen.SetActive(true);
+        finishBar.SetActive(false);
     }
 
     public void ChangeToLoseScreen()
     {
-      
+        playScreen.SetActive(false);
+        LoseScreen.SetActive(true);
+        WinScreen.SetActive(false);
+        finishBar.SetActive(false);
     }
 
 
