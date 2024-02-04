@@ -23,12 +23,11 @@ public class GameUIStateMachine : MonoBehaviour
         
     }
 
-    public void ChangeToFinishScreen()
+    public void AddProgressBar()
     {
         finishBar.SetActive(true);
-        playScreen.SetActive(false);
-        LoseScreen.SetActive(false);
-        WinScreen.SetActive(false);
+        playScreen.SetActive(true);
+
     }
 
     public void ChangeToWinScreen()
