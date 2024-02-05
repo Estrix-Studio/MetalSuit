@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
     [SerializeField] private Transform target;
-    
-    private Vector3 velocity = Vector3.zero;
-    private float smoothTime = 0.25f;
+    [SerializeField] private float distance = 10.0f; // Distance from the player
+    [SerializeField] private float height = 5.0f; // Height above the player
 
     void FixedUpdate()
     {
-        Vector3 targetPosition = target.position + offset;
-        targetPosition.y = offset.y;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        // Position the camera behind the player at the specified distance and height
+        Vector3 targetPosition = target.position - target.forward * distance;
+        targetPosition.y = target.position.y + height;
+        transform.position = targetPosition;
+
+        // Make the camera look at the player
+        transform.LookAt(target);
     }
 }
