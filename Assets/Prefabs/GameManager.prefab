@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7569344526562401122
+--- !u!1 &3299327051552118552
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4885400311539439269}
-  - component: {fileID: 4498795867288237093}
-  - component: {fileID: 5959579753748880376}
+  - component: {fileID: 6052426836807721741}
+  - component: {fileID: 8492719839901256454}
+  - component: {fileID: 1563339298943577663}
+  - component: {fileID: 3181031384796170121}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -18,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4885400311539439269
+--- !u!4 &6052426836807721741
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569344526562401122}
+  m_GameObject: {fileID: 3299327051552118552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4498795867288237093
+--- !u!114 &8492719839901256454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569344526562401122}
+  m_GameObject: {fileID: 3299327051552118552}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b03a8c70b53a2e47bd082645e3cfbbf, type: 3}
@@ -47,13 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftStickAction: {fileID: 8346825885812320316, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
   attackButtonAction: {fileID: 6675685823339998078, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
---- !u!114 &5959579753748880376
+--- !u!114 &1563339298943577663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569344526562401122}
+  m_GameObject: {fileID: 3299327051552118552}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
@@ -74,6 +75,20 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerControls
+  m_DefaultActionMap: Input
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3181031384796170121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299327051552118552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b03a8c70b53a2e47bd082645e3cfbbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftStickAction: {fileID: 8346825885812320316, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
+  attackButtonAction: {fileID: 6675685823339998078, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
