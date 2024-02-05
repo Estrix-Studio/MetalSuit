@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private PlayerMovement playerMovement;
+    private PlayerStatus playerStatus;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private InputActionReference leftStick;
+
+    private void Start()
+{
+    // Instantiate PlayerMovement and initialize
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    playerMovement = player.AddComponent<PlayerMovement>();
+    playerStatus = player.AddComponent<PlayerStatus>();
+    playerMovement.SetupMobileInput(leftStick);
+    playerMovement.Initialize();
+    playerStatus.Initialize();
+}
 }
