@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float dashForce = 50f;
-    [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashCooldown = 0.75f;
+    [SerializeField] private float dashForce = 30;
+    [SerializeField] private float dashDuration = 0.8f;
+    [SerializeField] private float dashCooldown = 1.0f;
 
     private bool isDashing = false;
     private bool isDashCooldown = false;
