@@ -6,22 +6,13 @@
             "id": "84022ac1-a7da-45c1-b326-809f3abbf6f7",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "Move/Attack",
                     "type": "Value",
                     "id": "13545a4b-dd8f-473a-a4bb-98e9fb9ca411",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "33d4190c-0017-4aa9-a576-84be9d5c7bb0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,18 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "589ca301-0249-40ed-a187-d980bca58dc8",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
+                    "action": "Move/Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

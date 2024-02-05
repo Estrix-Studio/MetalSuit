@@ -5,116 +5,97 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float dashForce = 30;
-    [SerializeField] private float dashDuration = 0.8f;
-    [SerializeField] private float dashCooldown = 1.0f;
-
-    private bool isDashing = false;
-    private bool isDashCooldown = false;
+    [SerializeField] private float dashDistance = 3f;
+    [SerializeField] private float slowdownThreshold = 1f;
+    
+    private Vector3 dashStartPosition;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
     [SerializeField] private InputActionReference leftStick;
-    [SerializeField] private InputActionReference attackButton;
 
     private bool isUsingKeyboard;
 
     public void Initialize()
     {
-
-        // Initialization code here, if needed
+        // Subscribe to the performed and canceled events of the joystick action
+        leftStick.action.performed += _ => OnJoystickMoved();
+        leftStick.action.canceled += _ => OnJoystickReleased();
     }
 
     public void FixedUpdate()
     {
-        if (leftStick.action.ReadValue<Vector2>() != Vector2.zero)
-            isUsingKeyboard = false;
-        else
-            isUsingKeyboard = true;
-
-        if (!isDashing)
-        {
-            direction = isUsingKeyboard ? GetKeyboardInput() : leftStick.action.ReadValue<Vector2>();
-            MovePlayer(direction);
-
-            CheckForDash();
-        }
+        
+        direction = leftStick.action.ReadValue<Vector2>();
+        
+        MovePlayer(direction);
+        
+    // Check if the player has dashed the maximum distance
+    if (Vector3.Distance(dashStartPosition, transform.position) >= dashDistance)
+    {
+        // Stop the dash
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        dashStartPosition = transform.position;
     }
 
-    private Vector2 GetKeyboardInput()
+    // If the player is dashing
+    if (GetComponent<Rigidbody>().velocity != Vector3.zero)
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        float dash = Input.GetAxis("Dash");
-        return new Vector2(horizontal, vertical);
+        float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
+
+        // If the remaining distance is less than the slowdown threshold, start reducing the player's speed
+        if (remainingDistance < slowdownThreshold)
+        {
+            float slowdownFactor = remainingDistance / slowdownThreshold;
+            GetComponent<Rigidbody>().velocity *= slowdownFactor;
+        }
+    }
     }
 
     private void MovePlayer(Vector2 moveDirection)
     {
         lastMoveDirection = new Vector3(moveDirection.x, 0, moveDirection.y);
 
-        Vector3 movement = lastMoveDirection * moveSpeed * Time.fixedDeltaTime;
+        // Rotate the player to face in the direction of movement only if the player is moving
+        if (lastMoveDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, moveSpeed * Time.deltaTime);
+        }
+
+        Vector3 movement = lastMoveDirection * moveSpeed * Time.deltaTime;
         GetComponent<Rigidbody>().MovePosition(transform.position + movement);
     }
 
-    public void CheckForDash()
+    private void OnJoystickMoved()
     {
-        if ((Input.GetAxis("Dash") > 0|| attackButton.action.ReadValue<float>() > 0) && !isDashCooldown)
-        {
-            Debug.Log("Attack");
-            StartCoroutine(Dash());
-        }
+        direction = leftStick.action.ReadValue<Vector2>();
+        MovePlayer(direction);
     }
 
-    private System.Collections.IEnumerator Dash()
+    private void OnJoystickReleased()
     {
-        if (!isDashing)
-        {
-            // Store the original move speed
-            float originalMoveSpeed = moveSpeed;
-
-            isDashing = true;
-
-            float elapsedTime = 0f;
-
-            while (elapsedTime < dashDuration)
-            {
-                // Calculate the new position based on the dash direction
-                Vector3 newPosition = transform.position + lastMoveDirection * dashForce * Time.fixedDeltaTime;
-
-
-                // Move the player
-                GetComponent<Rigidbody>().MovePosition(newPosition);
-                // Increase elapsed time
-                elapsedTime += Time.fixedDeltaTime;
-
-                yield return null;
-            }
-
-            // Restore the original move speed
-
-            isDashing = false;
-            isDashCooldown = true;
-
-            // Add cooldown duration
-            yield return new WaitForSeconds(dashCooldown);
-
-            isDashCooldown = false;
-        }
+        Dash();
     }
 
-    public void SetDirection(Vector2 newDirection)
+    private void Dash()
     {
-        direction = newDirection.normalized;
+        // Start the dash
+        var position = transform.position;
+
+        // Use the last move direction as the dash direction
+        Vector3 dashDirection = this.transform.forward;
+        dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+
+        GetComponent<Rigidbody>().velocity =
+            Vector3.Lerp(position, position + dashDirection * dashDistance, dashForce);
+
+        // Reset the dash start position
+        dashStartPosition = transform.position;
     }
 
-    public void SetupMobileInput(InputActionReference leftStick, InputActionReference attackButton)
+    public void SetupMobileInput(InputActionReference leftStick)
     {
         this.leftStick = leftStick;
-        this.attackButton = attackButton;
-    }
-
-    public bool GetIsDashing()
-    {
-        return isDashing;
     }
 }
