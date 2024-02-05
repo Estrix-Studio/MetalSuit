@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 447647259}
   - component: {fileID: 447647260}
-  - component: {fileID: 447647261}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -165,41 +164,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 447647257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c871da386dd659e46a88b2eb855c729c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b03a8c70b53a2e47bd082645e3cfbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ffd9a0bbfdc50ae46beec9e365df3b31, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerControls
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &447647261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447647257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f653150908d08a6489d7950c8adeff77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftStickAction: {fileID: 8346825885812320316, guid: ffd9a0bbfdc50ae46beec9e365df3b31, type: 3}
-  attackButtonAction: {fileID: 6675685823339998078, guid: ffd9a0bbfdc50ae46beec9e365df3b31, type: 3}
+  leftStickAction: {fileID: 6675685823339998078, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
+  attackButtonAction: {fileID: 8346825885812320316, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 779127013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01fdf9588f24294d825e5e69bb976ea, type: 3}
+  m_Script: {fileID: 11500000, guid: c806b27b6104f93499c90e3dcd63f229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
@@ -398,7 +367,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8703e81381026244287b2eb701d8d15e, type: 2}
+  - {fileID: 2100000, guid: 3a39ac582e9ce344d889037bb297a90c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -588,6 +557,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -662,13 +632,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.3054554, y: -0, z: -0, w: 0.9522064}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.571, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f994a22a328f874b8a0dcaa1f31699b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  target: {fileID: 2001923880}
 --- !u!1 &1034398305
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +666,7 @@ GameObject:
   - component: {fileID: 1034398307}
   - component: {fileID: 1034398306}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Joystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,7 +1112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1cd70e2fa5daa94b92388b12867e4bf, type: 2}
+  - {fileID: 2100000, guid: cf9dc5751aff7394e93e493c2eb55b97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
