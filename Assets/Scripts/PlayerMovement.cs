@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float dashForce = 30;
-    [SerializeField] private float dashDistance = 3f;
+    [SerializeField] private float dashForce = 50f;
+    [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
     
     private Vector3 dashStartPosition;
@@ -80,18 +80,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        // Start the dash
-        var position = transform.position;
-
-        // Use the last move direction as the dash direction
         Vector3 dashDirection = this.transform.forward;
         dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
 
         GetComponent<Rigidbody>().velocity =
-            Vector3.Lerp(position, position + dashDirection * dashDistance, dashForce);
-
-        // Reset the dash start position
-        dashStartPosition = transform.position;
+            Vector3.Lerp(dashDirection, dashDirection * dashDistance, dashForce);
     }
 
     public void SetupMobileInput(InputActionReference leftStick)
