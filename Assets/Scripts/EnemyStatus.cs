@@ -5,6 +5,9 @@ public class EnemyStatus : MonoBehaviour
     [SerializeField] private float maxHealth = 50f;
     private float currentHealth;
 
+    public float damage = 5;
+    public float knockbackForce = 15;
+    public float knockbackDuration = 0.3f;
     private void Start()
     {
         currentHealth = maxHealth;

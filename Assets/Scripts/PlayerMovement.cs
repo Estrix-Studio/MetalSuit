@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDashing = false;
     private bool isDashCooldown = false;
+
+
+    private bool isKnockback = false;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
@@ -31,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         else
             isUsingKeyboard = true;
 
-        if (!isDashing)
+        if (!isDashing || !isKnockback)
         {
             direction = isUsingKeyboard ? GetKeyboardInput() : leftStick.action.ReadValue<Vector2>();
             MovePlayer(direction);
@@ -116,5 +119,32 @@ public class PlayerMovement : MonoBehaviour
     public bool GetIsDashing()
     {
         return isDashing;
+    }
+
+    public void TakeDamage(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    {
+        if (!isKnockback)
+        {
+            isDashing = false;
+            StartCoroutine(Knockback(damageSourcePosition, knockbackForce, knockbackDuration));
+        }
+    }
+
+    private System.Collections.IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    {
+        isKnockback = true;
+
+        // Calculate the direction away from the damage source
+        Vector3 knockbackDirection = (transform.position - damageSourcePosition).normalized;
+
+        // Apply force to the Rigidbody
+        GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+
+        // Wait for the specified knockback duration
+        yield return new WaitForSeconds(knockbackDuration);
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        isKnockback = false;
     }
 }
