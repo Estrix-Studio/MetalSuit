@@ -37,6 +37,7 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+            Debug.Log("Heal");
         }
     }
 
@@ -89,6 +90,21 @@ public class PlayerStatus : MonoBehaviour
             }
 
             TakeDamage(recivedDamage, collisionPosition, recivedForce, recivedDuration);
+        }
+
+        else if( collision.transform.tag == "Repair")
+        {
+            Heal(5);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Repair")
+        {
+            Heal(5);
+            Destroy(other.gameObject);
         }
     }
 }
