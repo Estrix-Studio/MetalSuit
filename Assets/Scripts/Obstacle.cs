@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
 {
     public ObstacleType obstacleType;
 
-    public float damage = 5;
+    public int damage = 5;
     public float knockbackForce = 15;
     public float knockbackDuration = 0.3f;
     public bool isSlamming;
@@ -28,12 +28,12 @@ public class Obstacle : MonoBehaviour
             if (!isSlamming)
             {
                 foreach (Collider c in damageColliders)
-                    c.gameObject.SetActive(false);
+                    c.enabled = false;
             }
             else
             {
                 foreach (Collider c in damageColliders)
-                    c.gameObject.SetActive(true);
+                    c.enabled = true;
             }
         }
     }

@@ -7,10 +7,12 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
     private PlayerMovement PlayerMovement;
+    private HealthBarController healthBarController;
 
     public void Initialize()
     {
         PlayerMovement = GetComponent<PlayerMovement>();
+        healthBarController = FindAnyObjectByType<HealthBarController>();
         // Initialization code here, if needed
     }
     private void Start()
@@ -18,12 +20,13 @@ public class PlayerStatus : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage, Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    public void TakeDamage(int damage, Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
     {
         Debug.Log("OUCH");
         if (currentHealth > 0)
         {
             currentHealth -= damage;
+            healthBarController.GetDamage(damage);
             if (currentHealth <= 0)
             {
                 Die();
@@ -32,10 +35,11 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public void Heal(float amount)
+    public void Heal(int amount)
     {
         if (currentHealth > 0)
         {
+            healthBarController.GetHeal(amount);
             currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
             Debug.Log("Heal");
         }
@@ -52,7 +56,7 @@ public class PlayerStatus : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 collisionPosition = collision.contacts[0].point;
-        float recivedDamage =0;
+        int recivedDamage =0;
         float recivedForce =0;
         float recivedDuration = 0;
 
