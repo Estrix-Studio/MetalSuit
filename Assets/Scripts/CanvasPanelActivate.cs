@@ -15,7 +15,12 @@ public class CanvasPanelActivate : MonoBehaviour
 
     public void ToggleSettingsPanel()
     {
-        settingsPanel.SetActive(!settingsPanel.activeSelf);
+        settingsPanel.SetActive(true);
+    }
+
+    public void ToggleSettingsExitPanel()
+    {
+        settingsPanel.SetActive(false);
     }
 
     public void ToggleCoinAndGemPanel()
@@ -23,8 +28,18 @@ public class CanvasPanelActivate : MonoBehaviour
         gemAndcoinPanel.SetActive(!gemAndcoinPanel.activeSelf);
     }
 
+    public void ToggleCoinAndGemPanelExit()
+    {
+        gemAndcoinPanel.SetActive(false);
+    }
+
     public void ToggleMissionPanel()
     {
-        missionPanel.SetActive(!missionPanel.activeSelf);
+        missionPanel.SetActive(true);
+    }
+
+    public void ToggleMissionPanelExit()
+    {
+        missionPanel.SetActive(false);
     }
 }
