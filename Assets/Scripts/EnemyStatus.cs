@@ -17,7 +17,12 @@ public class EnemyStatus : MonoBehaviour
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
+                SoundManager.instance.PlayerSound(Sound.EnemyDie);
                 Die();
+            }
+            else
+            {
+                SoundManager.instance.PlayerSound(Sound.EnemyHit);
             }
         }
     }
