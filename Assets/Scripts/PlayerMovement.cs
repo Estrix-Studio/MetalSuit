@@ -65,6 +65,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = lastMoveDirection * moveSpeed * Time.deltaTime;
         GetComponent<Rigidbody>().MovePosition(transform.position + movement);
+        if (movement.magnitude > 0)
+        {
+            SoundManager.instance.PlayerSound(Sound.Walk);
+        }
     }
 
     private void OnJoystickMoved()

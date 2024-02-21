@@ -123,6 +123,65 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13263061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13263063}
+  - component: {fileID: 13263062}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &13263062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13263061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f538f1d939ac18a478c213de943fc73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundAudioClipArray:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: d7135e575b26ec84b80f520807d688b3, type: 3}
+  - sound: 4
+    audioClip: {fileID: 8300000, guid: 1a992b7b98e5a234ab9d5fb86872360e, type: 3}
+  - sound: 5
+    audioClip: {fileID: 8300000, guid: b122df4b694b74745b7946952609e94b, type: 3}
+  - sound: 7
+    audioClip: {fileID: 8300000, guid: 1f6d3d4cf6b8818418ace7683f5aff46, type: 3}
+  - sound: 10
+    audioClip: {fileID: 8300000, guid: 2175e60aebd6a424a82c0a199d7055bd, type: 3}
+  - sound: 8
+    audioClip: {fileID: 8300000, guid: 13ea4a6848114b34890226b2a909c91b, type: 3}
+  - sound: 9
+    audioClip: {fileID: 8300000, guid: 45c1d054e2f3d6b43bea16eabe6fdb19, type: 3}
+--- !u!4 &13263063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13263061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &19154501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,3 +1664,4 @@ SceneRoots:
   - {fileID: 1466348586}
   - {fileID: 298329180}
   - {fileID: 755226654}
+  - {fileID: 13263063}
