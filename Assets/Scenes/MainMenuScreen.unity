@@ -123,11 +123,8 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!1 &26292644
-=======
 --- !u!1 &657055843
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,37 +132,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 26292645}
   - component: {fileID: 26292647}
   - component: {fileID: 26292646}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
-=======
   - component: {fileID: 657055846}
   - component: {fileID: 657055845}
   - component: {fileID: 657055844}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
->>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
 --- !u!224 &26292645
 RectTransform:
-=======
 --- !u!81 &657055844
 AudioListener:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 26292644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -201,7 +191,6 @@ MonoBehaviour:
       m_Calls: []
   m_Texture: {fileID: 2800000, guid: 4d6a287b282dff040a26ca3f3fd7196b, type: 3}
   m_UVRect:
-=======
   m_GameObject: {fileID: 657055843}
   m_Enabled: 1
 --- !u!20 &657055845
@@ -230,13 +219,11 @@ Camera:
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
->>>>>>> Stashed changes
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-<<<<<<< Updated upstream
 --- !u!222 &26292647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -701,7 +688,6 @@ Canvas:
   m_TargetDisplay: 0
 --- !u!224 &704871440
 RectTransform:
-=======
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -724,12 +710,10 @@ RectTransform:
   m_StereoSeparation: 0.022
 --- !u!4 &657055846
 Transform:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 704871436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -753,7 +737,6 @@ Transform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &925783667
-=======
   m_GameObject: {fileID: 657055843}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -764,7 +747,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1323585362
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -772,7 +754,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 925783668}
   - component: {fileID: 925783670}
   - component: {fileID: 925783669}
@@ -1230,11 +1211,9 @@ GameObject:
   - component: {fileID: 1172373479}
   - component: {fileID: 1172373478}
   - component: {fileID: 1172373477}
-=======
   - component: {fileID: 1323585365}
   - component: {fileID: 1323585364}
   - component: {fileID: 1323585363}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1242,21 +1221,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
 --- !u!114 &1172373477
-=======
 --- !u!114 &1323585363
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1172373476}
-=======
   m_GameObject: {fileID: 1323585362}
->>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
@@ -1270,21 +1243,15 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
-<<<<<<< Updated upstream
 --- !u!114 &1172373478
-=======
 --- !u!114 &1323585364
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1172373476}
-=======
   m_GameObject: {fileID: 1323585362}
->>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
@@ -1293,21 +1260,15 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
-<<<<<<< Updated upstream
 --- !u!4 &1172373479
-=======
 --- !u!4 &1323585365
->>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1172373476}
-=======
   m_GameObject: {fileID: 1323585362}
->>>>>>> Stashed changes
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1316,11 +1277,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
 --- !u!1 &1238524680
-=======
 --- !u!1 &1640362342
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1328,7 +1286,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 1238524681}
   - component: {fileID: 1238524683}
   - component: {fileID: 1238524682}
@@ -1656,10 +1613,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1354931246}
   - component: {fileID: 1354931245}
-=======
   - component: {fileID: 1640362344}
   - component: {fileID: 1640362343}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1667,21 +1622,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
 --- !u!108 &1354931245
-=======
 --- !u!108 &1640362343
->>>>>>> Stashed changes
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1354931244}
-=======
   m_GameObject: {fileID: 1640362342}
->>>>>>> Stashed changes
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 1
@@ -1737,21 +1686,15 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-<<<<<<< Updated upstream
 --- !u!4 &1354931246
-=======
 --- !u!4 &1640362344
->>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1354931244}
-=======
   m_GameObject: {fileID: 1640362342}
->>>>>>> Stashed changes
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
@@ -1760,11 +1703,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
-<<<<<<< Updated upstream
 --- !u!1 &1535788791
-=======
 --- !u!1 &2067029480
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1772,37 +1712,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 1535788795}
   - component: {fileID: 1535788794}
   - component: {fileID: 1535788793}
   - component: {fileID: 1535788792}
   m_Layer: 5
   m_Name: Button
-=======
   - component: {fileID: 2067029484}
   - component: {fileID: 2067029483}
   - component: {fileID: 2067029482}
   - component: {fileID: 2067029481}
   m_Layer: 5
   m_Name: Canvas
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
 --- !u!114 &1535788792
-=======
 --- !u!114 &2067029481
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1535788791}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3025,7 +2958,6 @@ Camera:
   m_StereoSeparation: 0.022
 --- !u!4 &2107631419
 Transform:
-=======
   m_GameObject: {fileID: 2067029480}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3039,18 +2971,15 @@ Transform:
     m_Bits: 4294967295
 --- !u!114 &2067029482
 MonoBehaviour:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 2107631416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-=======
   m_GameObject: {fileID: 2067029480}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3101,32 +3030,25 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
->>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-<<<<<<< Updated upstream
   - {fileID: 2107631419}
   - {fileID: 1354931246}
   - {fileID: 704871440}
   - {fileID: 1172373479}
   - {fileID: 1535788795}
-=======
   - {fileID: 1640362344}
   - {fileID: 657055846}
   - {fileID: 2067029484}
   - {fileID: 1323585365}
->>>>>>> Stashed changes
