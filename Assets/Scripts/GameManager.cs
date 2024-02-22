@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         playerMovement = player.AddComponent<PlayerMovement>();
         playerStatus = player.AddComponent<PlayerStatus>();
         playerMovement.Initialize();
-        playerMovement.SetupMobileInput(leftStickAction, attackButtonAction);
+        playerMovement.SetupMobileInput(leftStickAction);
         playerStatus.Initialize();
         // Other initialization code
     }
