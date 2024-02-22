@@ -2750,8 +2750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b03a8c70b53a2e47bd082645e3cfbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftStickAction: {fileID: 0}
-  attackButtonAction: {fileID: 0}
+  leftStickAction: {fileID: 8346825885812320316, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
 --- !u!114 &7453811231565923177
 MonoBehaviour:
   m_ObjectHideFlags: 0

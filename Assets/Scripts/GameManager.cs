@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private PlayerStatus playerStatus;
 
     [SerializeField] private InputActionReference leftStickAction;
-    [SerializeField] private InputActionReference attackButtonAction;
 
     private void Start()
     {
