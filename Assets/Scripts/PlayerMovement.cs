@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         
         direction = leftStick.action.ReadValue<Vector2>();
-        
         MovePlayer(direction);
         
     // Check if the player has dashed the maximum distance

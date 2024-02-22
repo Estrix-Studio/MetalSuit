@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.AddComponent<PlayerMovement>();
         playerStatus = player.AddComponent<PlayerStatus>();
-        playerMovement.Initialize();
         playerMovement.SetupMobileInput(leftStickAction);
+        playerMovement.Initialize();      
         playerStatus.Initialize();
         // Other initialization code
     }
