@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIStateMachine : MonoBehaviour
 {
     public GameObject playScreen, finishBar, WinScreen, LoseScreen;
+ 
 
     public Text coinText, gemText, dataText;
+
+
+   
 
     private void Start()
     {
