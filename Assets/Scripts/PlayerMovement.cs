@@ -7,13 +7,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce = 50f;
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
-    
+    [SerializeField] private float maxDashDuration = .75f;
+
     private Vector3 dashStartPosition;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
     private bool isDashing = false;
-    private bool isKnockback = false;
+    private float dashTimer = 0f;
+
+    bool isKnockback;
 
     [SerializeField] private InputActionReference leftStick;
 
@@ -28,32 +31,38 @@ public class PlayerMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
-        direction = leftStick.action.ReadValue<Vector2>();
-        MovePlayer(direction);
-        
-    // Check if the player has dashed the maximum distance
-    if (Vector3.Distance(dashStartPosition, transform.position) >= dashDistance)
-    {
-        // Stop the dash
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        dashStartPosition = transform.position;
-            isDashing = false;
-    }
-
-    // If the player is dashing
-    if (GetComponent<Rigidbody>().velocity != Vector3.zero)
-    {
-            isDashing = true;
-        float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
-
-        // If the remaining distance is less than the slowdown threshold, start reducing the player's speed
-        if (remainingDistance < slowdownThreshold)
+        if (!isDashing)
         {
-            float slowdownFactor = remainingDistance / slowdownThreshold;
-            GetComponent<Rigidbody>().velocity *= slowdownFactor;
+            direction = leftStick.action.ReadValue<Vector2>();
+            MovePlayer(direction);
         }
-    }
+
+        // If the player is dashing
+        if (isDashing)
+        {
+            Debug.Log("Dashing");
+            dashTimer += Time.fixedDeltaTime;
+
+            // Check if the elapsed time exceeds the max dash duration
+            if (dashTimer >= maxDashDuration)
+            {
+                isDashing = false;
+                Debug.Log("Stop");
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                dashStartPosition = transform.position;
+                dashTimer = 0f; // Reset the dash timer
+            }
+            else
+            {
+                // Apply slowdown only when the remaining distance is less than the slowdown threshold
+                float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
+                if (remainingDistance < slowdownThreshold)
+                {
+                    float slowdownFactor = remainingDistance / slowdownThreshold;
+                    GetComponent<Rigidbody>().velocity *= slowdownFactor;
+                }
+            }
+        }
     }
 
     private void MovePlayer(Vector2 moveDirection)
@@ -69,10 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = lastMoveDirection * moveSpeed * Time.deltaTime;
         GetComponent<Rigidbody>().MovePosition(transform.position + movement);
-        if (movement.magnitude > 0)
-        {
-            SoundManager.instance.PlayerSound(Sound.Walk);
-        }
     }
 
     private void OnJoystickMoved()
@@ -83,16 +88,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJoystickReleased()
     {
+        Debug.Log("Release");
         Dash();
     }
 
     private void Dash()
     {
-        Vector3 dashDirection = this.transform.forward;
-        dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+        if (!isDashing)
+        {
+            Debug.Log("Start Dash");
+            isDashing = true;
+            dashStartPosition = transform.position;
 
-        GetComponent<Rigidbody>().velocity =
-            Vector3.Lerp(dashDirection, dashDirection * dashDistance, dashForce);
+            Vector3 dashDirection = this.transform.forward;
+            dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+
+            GetComponent<Rigidbody>().velocity = dashDirection * dashForce;
+            dashTimer = 0f; // Reset the dash timer
+        }
     }
 
     public void SetupMobileInput(InputActionReference leftStick)
