@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,47 +8,53 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce = 50f;
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
-    [SerializeField] private float maxDashDuration = .75f;
+    [SerializeField] private float maxDashDuration = 1f;
 
     private Vector3 dashStartPosition;
+    private Vector2 swipeStartPosition;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
     private bool isDashing = false;
     private float dashTimer = 0f;
 
-    bool isKnockback;
+    private bool isUsingSwipe = false;
 
-    [SerializeField] private InputActionReference leftStick;
+    private bool isKnockback = false;
 
-    private bool isUsingKeyboard;
+    [SerializeField] private InputActionReference PrimaryContact;
+    [SerializeField] private InputActionReference PrimaryPosition;
 
     public void Initialize()
     {
-        // Subscribe to the performed and canceled events of the joystick action
-        leftStick.action.performed += _ => OnJoystickMoved();
-        leftStick.action.canceled += _ => OnJoystickReleased();
+
+        // Initialization code here, if needed
     }
 
-    public void FixedUpdate()
+    private void Start()
     {
-        if (!isDashing)
+        PrimaryContact.action.started += ctx => OnStartTouchPrimary(ctx);
+        PrimaryContact.action.canceled += ctx => OnEndTouchPrimary(ctx);
+        //PrimaryPosition.action.performed += _ => OnTapPerformed();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isDashing && isUsingSwipe)
         {
-            direction = leftStick.action.ReadValue<Vector2>();
-            MovePlayer(direction);
+            direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
+            MovePlayer(direction.normalized);
         }
 
         // If the player is dashing
         if (isDashing)
         {
-            Debug.Log("Dashing");
             dashTimer += Time.fixedDeltaTime;
 
             // Check if the elapsed time exceeds the max dash duration
             if (dashTimer >= maxDashDuration)
             {
                 isDashing = false;
-                Debug.Log("Stop");
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 dashStartPosition = transform.position;
                 dashTimer = 0f; // Reset the dash timer
@@ -80,37 +87,42 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Rigidbody>().MovePosition(transform.position + movement);
     }
 
-    private void OnJoystickMoved()
+    private void OnStartTouchPrimary(InputAction.CallbackContext context)
     {
-        direction = leftStick.action.ReadValue<Vector2>();
-        MovePlayer(direction);
+        Debug.Log("Swipe");
+        if (!isUsingSwipe)
+        {
+            isUsingSwipe = true;
+            swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
+        }
     }
 
-    private void OnJoystickReleased()
+    private void OnEndTouchPrimary(InputAction.CallbackContext context)
     {
-        Debug.Log("Release");
+        isUsingSwipe = false;
         Dash();
     }
-
+    private void OnTapPerformed()
+    {
+        Debug.Log("Tap");
+        if (!isDashing)
+        {
+            Dash();
+        }
+    }
     private void Dash()
     {
         if (!isDashing)
         {
-            Debug.Log("Start Dash");
             isDashing = true;
             dashStartPosition = transform.position;
 
-            Vector3 dashDirection = this.transform.forward;
+            Vector3 dashDirection = lastMoveDirection;
             dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
 
-            GetComponent<Rigidbody>().velocity = dashDirection * dashForce;
+            GetComponent<Rigidbody>().velocity = dashDirection.normalized * dashForce;
             dashTimer = 0f; // Reset the dash timer
         }
-    }
-
-    public void SetupMobileInput(InputActionReference leftStick)
-    {
-        this.leftStick = leftStick;
     }
 
     public bool GetIsDashing()
@@ -143,5 +155,11 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         isKnockback = false;
+    }
+
+    public void SetupMobileInput(InputActionReference swipeAction, InputActionReference tap)
+    {
+        this.PrimaryContact = swipeAction;
+        this.PrimaryPosition = tap;
     }
 }

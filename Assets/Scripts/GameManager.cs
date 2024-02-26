@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerStatus playerStatus;
 
-    [SerializeField] private InputActionReference leftStickAction;
+    [SerializeField] private InputActionReference contactAction;
+    [SerializeField] private InputActionReference positionAction;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.AddComponent<PlayerMovement>();
         playerStatus = player.AddComponent<PlayerStatus>();
-        playerMovement.SetupMobileInput(leftStickAction);
+        playerMovement.SetupMobileInput(contactAction, positionAction);
         playerMovement.Initialize();      
         playerStatus.Initialize();
         // Other initialization code
