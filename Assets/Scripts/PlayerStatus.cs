@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
+    [SerializeField] private int maxHealth = 100;
+    private int currentHealth;
     private PlayerMovement PlayerMovement;
     private HealthBarController healthBarController;
 
@@ -13,6 +13,7 @@ public class PlayerStatus : MonoBehaviour
     {
         PlayerMovement = GetComponent<PlayerMovement>();
         healthBarController = FindAnyObjectByType<HealthBarController>();
+        healthBarController.SetMaxHealth(maxHealth);
         // Initialization code here, if needed
     }
     private void Start()
@@ -111,6 +112,7 @@ public class PlayerStatus : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
 }
 
 

@@ -12,8 +12,6 @@ public class HealthBarController : MonoBehaviour
     void Start()
     {
         healthBar = GetComponent<Slider>();
-        healthBar.value = currentHealth = 100;
-        Debug.Log(healthBar.value);
     }
 
     // Update is called once per frame
@@ -33,5 +31,12 @@ public class HealthBarController : MonoBehaviour
         currentHealth += heal;
         healthBar.value = currentHealth;
         Debug.Log(healthBar.value);
+    }
+
+    public void SetMaxHealth(int max) 
+    {
+        currentHealth = max;
+        healthBar.maxValue = max;
+        healthBar.value = currentHealth;
     }
 }
