@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,49 +8,68 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce = 50f;
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
-    
+    [SerializeField] private float maxDashDuration = 1f;
+
     private Vector3 dashStartPosition;
+    private Vector2 swipeStartPosition;
     private Vector2 direction;
     private Vector3 lastMoveDirection;
 
-    [SerializeField] private InputActionReference leftStick;
+    private bool isDashing = false;
+    private float dashTimer = 0f;
 
-    private bool isUsingKeyboard;
+    private bool isUsingSwipe = false;
+
+    private bool isKnockback = false;
+
+    [SerializeField] private InputActionReference PrimaryContact;
+    [SerializeField] private InputActionReference PrimaryPosition;
 
     public void Initialize()
     {
-        // Subscribe to the performed and canceled events of the joystick action
-        leftStick.action.performed += _ => OnJoystickMoved();
-        leftStick.action.canceled += _ => OnJoystickReleased();
+
+        // Initialization code here, if needed
     }
 
-    public void FixedUpdate()
+    private void Start()
     {
-        
-        direction = leftStick.action.ReadValue<Vector2>();
-        
-        MovePlayer(direction);
-        
-    // Check if the player has dashed the maximum distance
-    if (Vector3.Distance(dashStartPosition, transform.position) >= dashDistance)
-    {
-        // Stop the dash
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        dashStartPosition = transform.position;
+        PrimaryContact.action.started += ctx => OnStartTouchPrimary(ctx);
+        PrimaryContact.action.canceled += ctx => OnEndTouchPrimary(ctx);
+        //PrimaryPosition.action.performed += _ => OnTapPerformed();
     }
 
-    // If the player is dashing
-    if (GetComponent<Rigidbody>().velocity != Vector3.zero)
+    private void FixedUpdate()
     {
-        float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
-
-        // If the remaining distance is less than the slowdown threshold, start reducing the player's speed
-        if (remainingDistance < slowdownThreshold)
+        if (!isDashing && isUsingSwipe)
         {
-            float slowdownFactor = remainingDistance / slowdownThreshold;
-            GetComponent<Rigidbody>().velocity *= slowdownFactor;
+            direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
+            MovePlayer(direction.normalized);
         }
-    }
+
+        // If the player is dashing
+        if (isDashing)
+        {
+            dashTimer += Time.fixedDeltaTime;
+
+            // Check if the elapsed time exceeds the max dash duration
+            if (dashTimer >= maxDashDuration)
+            {
+                isDashing = false;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                dashStartPosition = transform.position;
+                dashTimer = 0f; // Reset the dash timer
+            }
+            else
+            {
+                // Apply slowdown only when the remaining distance is less than the slowdown threshold
+                float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
+                if (remainingDistance < slowdownThreshold)
+                {
+                    float slowdownFactor = remainingDistance / slowdownThreshold;
+                    GetComponent<Rigidbody>().velocity *= slowdownFactor;
+                }
+            }
+        }
     }
 
     private void MovePlayer(Vector2 moveDirection)
@@ -67,28 +87,79 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Rigidbody>().MovePosition(transform.position + movement);
     }
 
-    private void OnJoystickMoved()
+    private void OnStartTouchPrimary(InputAction.CallbackContext context)
     {
-        direction = leftStick.action.ReadValue<Vector2>();
-        MovePlayer(direction);
+        Debug.Log("Swipe");
+        if (!isUsingSwipe)
+        {
+            isUsingSwipe = true;
+            swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
+        }
     }
 
-    private void OnJoystickReleased()
+    private void OnEndTouchPrimary(InputAction.CallbackContext context)
     {
+        isUsingSwipe = false;
         Dash();
     }
-
+    private void OnTapPerformed()
+    {
+        Debug.Log("Tap");
+        if (!isDashing)
+        {
+            Dash();
+        }
+    }
     private void Dash()
     {
-        Vector3 dashDirection = this.transform.forward;
-        dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+        if (!isDashing)
+        {
+            isDashing = true;
+            dashStartPosition = transform.position;
 
-        GetComponent<Rigidbody>().velocity =
-            Vector3.Lerp(dashDirection, dashDirection * dashDistance, dashForce);
+            Vector3 dashDirection = lastMoveDirection;
+            dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+
+            GetComponent<Rigidbody>().velocity = dashDirection.normalized * dashForce;
+            dashTimer = 0f; // Reset the dash timer
+        }
     }
 
-    public void SetupMobileInput(InputActionReference leftStick)
+    public bool GetIsDashing()
     {
-        this.leftStick = leftStick;
+        return isDashing;
+    }
+
+    public void TakeDamage(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    {
+        if (!isKnockback)
+        {
+            isDashing = false;
+            StartCoroutine(Knockback(damageSourcePosition, knockbackForce, knockbackDuration));
+        }
+    }
+
+    private System.Collections.IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    {
+        isKnockback = true;
+
+        // Calculate the direction away from the damage source
+        Vector3 knockbackDirection = (transform.position - damageSourcePosition).normalized;
+
+        // Apply force to the Rigidbody
+        GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+
+        // Wait for the specified knockback duration
+        yield return new WaitForSeconds(knockbackDuration);
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        isKnockback = false;
+    }
+
+    public void SetupMobileInput(InputActionReference swipeAction, InputActionReference tap)
+    {
+        this.PrimaryContact = swipeAction;
+        this.PrimaryPosition = tap;
     }
 }

@@ -5,6 +5,9 @@ public class EnemyStatus : MonoBehaviour
     [SerializeField] private float maxHealth = 50f;
     private float currentHealth;
 
+    public int damage = 5;
+    public float knockbackForce = 15;
+    public float knockbackDuration = 0.3f;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -17,7 +20,12 @@ public class EnemyStatus : MonoBehaviour
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
+                SoundManager.instance.PlayerSound(Sound.EnemyDie);
                 Die();
+            }
+            else
+            {
+                SoundManager.instance.PlayerSound(Sound.EnemyHit);
             }
         }
     }

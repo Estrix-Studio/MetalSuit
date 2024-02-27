@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
-
+    [SerializeField] private int maxHealth = 100;
+    private int currentHealth;
+    private PlayerMovement PlayerMovement;
+    private HealthBarController healthBarController;
 
     public void Initialize()
     {
-
+        PlayerMovement = GetComponent<PlayerMovement>();
+        healthBarController = FindAnyObjectByType<HealthBarController>();
+        healthBarController.SetMaxHealth(maxHealth);
         // Initialization code here, if needed
     }
     private void Start()
@@ -18,23 +21,28 @@ public class PlayerStatus : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage, Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
     {
+        Debug.Log("OUCH");
         if (currentHealth > 0)
         {
             currentHealth -= damage;
+            healthBarController.GetDamage(damage);
             if (currentHealth <= 0)
             {
                 Die();
             }
+            PlayerMovement.TakeDamage(damageSourcePosition,  knockbackForce,  knockbackDuration);
         }
     }
 
-    public void Heal(float amount)
+    public void Heal(int amount)
     {
         if (currentHealth > 0)
         {
+            healthBarController.GetHeal(amount);
             currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+            Debug.Log("Heal");
         }
     }
 
@@ -48,15 +56,63 @@ public class PlayerStatus : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
-        if (enemyStatus != null)
+        Vector3 collisionPosition = collision.contacts[0].point;
+        int recivedDamage =0;
+        float recivedForce =0;
+        float recivedDuration = 0;
+
+        if (PlayerMovement.GetIsDashing())
         {
-            // Damage the enemy only once during the dash
-            enemyStatus.TakeDamage(10f); // Adjust the damage amount as needed
-            Debug.Log("Hit!!");
+            EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
+            if (enemyStatus != null)
+            {
+                // Damage the enemy only once during the dash
+                enemyStatus.TakeDamage(10f); // Adjust the damage amount as needed
+                Debug.Log("Hit!!");
+            }
         }
-        
+        else if(collision.transform.tag == "Enemy")
+        {
+           
+            EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
+
+            if(enemyStatus != null) 
+            {
+                recivedDamage = enemyStatus.damage;
+                recivedForce =enemyStatus.knockbackForce;
+                recivedDuration =enemyStatus.knockbackDuration;
+            }
+            TakeDamage(recivedDamage, collisionPosition, recivedForce, recivedDuration);
+        }
+        else if (collision.transform.tag == "Obstacle")
+        {
+            Obstacle obstacle = collision.transform.parent.GetComponent<Obstacle>();
+            if (obstacle != null)
+            {
+                recivedDamage = obstacle.damage;
+                recivedForce = obstacle.knockbackForce;
+                recivedDuration = obstacle.knockbackDuration;
+            }
+
+            TakeDamage(recivedDamage, collisionPosition, recivedForce, recivedDuration);
+        }
+
+        else if( collision.transform.tag == "Repair")
+        {
+            Heal(5);
+            Destroy(collision.gameObject);
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Repair")
+        {
+            Heal(5);
+            Destroy(other.gameObject);
+        }
+    }
+
 }
 
 
