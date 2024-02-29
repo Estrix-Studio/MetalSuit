@@ -67,4 +67,38 @@ public class FinishSuitController : MonoBehaviour
             }
         }
     }
+
+    public void SuitDestruction(int currentHealth, int maxHealth)
+    {
+        float healthPercentage = currentHealth / maxHealth;
+        if(healthPercentage <= 80)
+        {
+            DestroyPart(finishSuitHead);
+            if(healthPercentage <= 70)
+            {
+                DestroyPart(finishSuitLeftArm);
+                if(healthPercentage <= 55)
+                {
+                    DestroyPart(finishSuitRightArm);
+                    if (healthPercentage <= 40)
+                    {
+                        DestroyPart(finishSuitLeftLeg);
+                        if(healthPercentage <=25)
+                        {
+                            DestroyPart(finishSuitRightLeg);
+                            if (healthPercentage <= 0)
+                            {
+                                DestroyPart(finishSuitChest);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void DestroyPart(GameObject part)
+    {
+        part.SetActive(false);
+    }
 }
