@@ -19,14 +19,14 @@ public class HealthBarController : MonoBehaviour
     {
 
     }
-    public void GetDamage(int dam)
+    public void Damage(int dam)
     {
         Debug.Log("ouch2");
         currentHealth -= dam;
         healthBar.value = currentHealth;
         Debug.Log(healthBar.value);
     }
-    public void GetHeal(int heal)
+    public void Heal(int heal)
     {
         currentHealth += heal;
         healthBar.value = currentHealth;

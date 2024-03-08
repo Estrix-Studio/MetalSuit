@@ -8,12 +8,13 @@ public class PlayerStatus : MonoBehaviour
     private int currentHealth;
     private PlayerMovement PlayerMovement;
     private HealthBarController healthBarController;
-
+    private FinishSuitController finishSuitController;
     public void Initialize()
     {
         PlayerMovement = GetComponent<PlayerMovement>();
         healthBarController = FindAnyObjectByType<HealthBarController>();
         healthBarController.SetMaxHealth(maxHealth);
+        finishSuitController = FindAnyObjectByType<FinishSuitController>();
         // Initialization code here, if needed
     }
     private void Start()
@@ -27,7 +28,13 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth -= damage;
-            healthBarController.GetDamage(damage);
+            healthBarController.Damage(damage);
+
+            if(finishSuitController != null) 
+            {
+                finishSuitController.SuitDestruction(currentHealth, maxHealth);
+            }
+
             if (currentHealth <= 0)
             {
                 Die();
@@ -40,7 +47,7 @@ public class PlayerStatus : MonoBehaviour
     {
         if (currentHealth > 0)
         {
-            healthBarController.GetHeal(amount);
+            healthBarController.Heal(amount);
             currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
             Debug.Log("Heal");
         }
