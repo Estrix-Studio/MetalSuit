@@ -6,24 +6,44 @@
             "id": "84022ac1-a7da-45c1-b326-809f3abbf6f7",
             "actions": [
                 {
-                    "name": "Move/Attack",
-                    "type": "Value",
-                    "id": "13545a4b-dd8f-473a-a4bb-98e9fb9ca411",
+                    "name": "PrimaryContact",
+                    "type": "Button",
+                    "id": "82113bbd-b887-46c2-88e4-0cf8d7815fa8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryPosition",
+                    "type": "PassThrough",
+                    "id": "87b31dbb-8efd-430f-baa1-2ff5e72d6494",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "40ad0f29-24cf-41d8-965a-37265c51fbd3",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "59f7a978-f3d1-48e7-b123-3c80b838e09f",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move/Attack",
+                    "action": "PrimaryContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dc53891-a047-41bc-92be-7cba9ddc9259",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
