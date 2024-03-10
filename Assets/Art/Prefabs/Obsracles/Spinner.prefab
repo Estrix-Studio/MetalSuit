@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4317830720425628571}
   - component: {fileID: 2033021536976890096}
   m_Layer: 0
-  m_Name: Spikebar2
+  m_Name: Spinner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
