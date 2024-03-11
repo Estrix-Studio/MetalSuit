@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Slider = UnityEngine.UI.Slider;
+using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
-    Slider healthBar;
+    private int currentHealth;
 
-    int currentHealth;
+    private Slider healthBar;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         healthBar = GetComponent<Slider>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
+
     public void Damage(int dam)
     {
         Debug.Log("ouch2");
@@ -26,6 +25,7 @@ public class HealthBarController : MonoBehaviour
         healthBar.value = currentHealth;
         Debug.Log(healthBar.value);
     }
+
     public void Heal(int heal)
     {
         currentHealth += heal;
@@ -33,7 +33,7 @@ public class HealthBarController : MonoBehaviour
         Debug.Log(healthBar.value);
     }
 
-    public void SetMaxHealth(int max) 
+    public void SetMaxHealth(int max)
     {
         currentHealth = max;
         healthBar.maxValue = max;

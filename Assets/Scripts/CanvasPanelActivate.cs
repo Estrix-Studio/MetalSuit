@@ -1,18 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using UnityEngine.UI;
 
 public class CanvasPanelActivate : MonoBehaviour
 {
     public GameObject settingsPanel;
-    public GameObject gemAndcoinPanel;
+    public GameObject gemAndCoinPanel;
     public GameObject missionPanel;
     public GameObject loadingScreen;
     public Slider loadingBar;
-
 
     public void LoadSceneByName(string sceneName)
     {
@@ -23,25 +20,22 @@ public class CanvasPanelActivate : MonoBehaviour
     {
         StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
-    IEnumerator LoadSceneAsynchronously(int levelIndex)
+
+    private IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        var operation = SceneManager.LoadSceneAsync(levelIndex);
         operation.allowSceneActivation = false;
 
         loadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            var progress = Mathf.Clamp01(operation.progress / 0.9f);
             loadingBar.value = progress;
-
 
             if (operation.progress >= 0.9f)
             {
-
                 yield return new WaitForSeconds(1f);
-
-
                 operation.allowSceneActivation = true;
             }
 
@@ -49,33 +43,8 @@ public class CanvasPanelActivate : MonoBehaviour
         }
     }
 
-    public void ToggleSettingsPanel()
+    public void TogglePanel(GameObject panel)
     {
-        settingsPanel.SetActive(true);
-    }
-
-    public void ToggleSettingsExitPanel()
-    {
-        settingsPanel.SetActive(false);
-    }
-
-    public void ToggleCoinAndGemPanel()
-    {
-        gemAndcoinPanel.SetActive(!gemAndcoinPanel.activeSelf);
-    }
-
-    public void ToggleCoinAndGemPanelExit()
-    {
-        gemAndcoinPanel.SetActive(false);
-    }
-
-    public void ToggleMissionPanel()
-    {
-        missionPanel.SetActive(true);
-    }
-
-    public void ToggleMissionPanelExit()
-    {
-        missionPanel.SetActive(false);
+        panel.SetActive(!panel.activeSelf);
     }
 }

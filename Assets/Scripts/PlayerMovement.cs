@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,26 +11,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxDashDuration = .5f;
     [SerializeField] private float maxSpeed = 20;
 
-    private Vector3 dashStartPosition;
-    private Vector2 swipeStartPosition;
-    private Vector2 direction;
-    private Vector3 lastMoveDirection;
-
-    private bool isDashing = false;
-    private float dashTimer = 0f;
-
-    private bool isUsingSwipe = false;
-
-    private bool isKnockback = false;
-
     [SerializeField] private InputActionReference PrimaryContact;
     [SerializeField] private InputActionReference PrimaryPosition;
 
-    public void Initialize()
-    {
+    private Vector3 dashStartPosition;
+    private float dashTimer;
+    private Vector2 direction;
 
-        // Initialization code here, if needed
-    }
+    private bool isDashing;
+
+    private bool isKnockback;
+
+    private bool isUsingSwipe;
+    private Vector3 lastMoveDirection;
+    private Vector2 swipeStartPosition;
 
     private void Start()
     {
@@ -56,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
         BrakeDash();
     }
 
+    public void Initialize()
+    {
+        // Initialization code here, if needed
+    }
+
 
     private void BrakeDash()
     {
@@ -63,10 +62,10 @@ public class PlayerMovement : MonoBehaviour
         {
             dashTimer += Time.fixedDeltaTime;
             // Apply slowdown only when the remaining distance is less than the slowdown threshold
-            float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
+            var remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
             if (remainingDistance < slowdownThreshold)
             {
-                float slowdownFactor = remainingDistance / slowdownThreshold;
+                var slowdownFactor = remainingDistance / slowdownThreshold;
                 GetComponent<Rigidbody>().velocity *= slowdownFactor;
                 if (GetComponent<Rigidbody>().velocity.sqrMagnitude == 0 || dashTimer >= maxDashDuration)
                 {
@@ -74,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
                     dashTimer = 0f;
                 }
             }
+
             Debug.Log("Braking");
         }
     }
@@ -85,18 +85,15 @@ public class PlayerMovement : MonoBehaviour
         // Rotate the player to face in the direction of movement only if the player is moving
         if (lastMoveDirection != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
+            var toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, moveSpeed * Time.deltaTime);
         }
 
         // Calculate the desired velocity
-        Vector3 desiredVelocity = lastMoveDirection * moveSpeed;
+        var desiredVelocity = lastMoveDirection * moveSpeed;
 
         // Clamp the magnitude of the velocity to the maximum speed
-        if (desiredVelocity.magnitude > maxSpeed)
-        {
-            desiredVelocity = desiredVelocity.normalized * maxSpeed;
-        }
+        if (desiredVelocity.magnitude > maxSpeed) desiredVelocity = desiredVelocity.normalized * maxSpeed;
 
         // Apply the velocity change
         GetComponent<Rigidbody>().velocity = desiredVelocity;
@@ -110,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true;
             dashStartPosition = transform.position;
 
-            Vector3 dashDirection = lastMoveDirection;
+            var dashDirection = lastMoveDirection;
             dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
 
             GetComponent<Rigidbody>().AddForce(dashDirection.normalized * dashForce, ForceMode.Impulse);
@@ -132,15 +129,13 @@ public class PlayerMovement : MonoBehaviour
         isUsingSwipe = false;
         Dash();
     }
+
     private void OnTapPerformed()
     {
         Debug.Log("Tap");
-        if (!isDashing)
-        {
-            Dash();
-        }
+        if (!isDashing) Dash();
     }
-    
+
 
     public bool GetIsDashing()
     {
@@ -156,12 +151,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    private IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
     {
         isKnockback = true;
 
         // Calculate the direction away from the damage source
-        Vector3 knockbackDirection = (transform.position - damageSourcePosition).normalized;
+        var knockbackDirection = (transform.position - damageSourcePosition).normalized;
 
         // Apply force to the Rigidbody
         GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
@@ -177,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetupMobileInput(InputActionReference swipeAction, InputActionReference tap)
     {
-        this.PrimaryContact = swipeAction;
-        this.PrimaryPosition = tap;
+        PrimaryContact = swipeAction;
+        PrimaryPosition = tap;
     }
 }
