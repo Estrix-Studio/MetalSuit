@@ -4,12 +4,12 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 20;
     [SerializeField] private float dashForce = 50f;
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
     [SerializeField] private float maxDashDuration = .5f;
-    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float maxSpeed = 20;
 
     private Vector3 dashStartPosition;
     private Vector2 swipeStartPosition;
@@ -41,12 +41,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isUsingSwipe)
+        if (isUsingSwipe && !isKnockback)
         {
             direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
             MovePlayer(direction.normalized);
         }
-        else if (!isDashing && !isUsingSwipe)
+        else if (!isDashing && !isUsingSwipe && !isKnockback)
         {
             // Stop the player from sliding
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void BrakeDash()
     {
-        if (isDashing)
+        if (isDashing && !isKnockback)
         {
             dashTimer += Time.fixedDeltaTime;
             // Apply slowdown only when the remaining distance is less than the slowdown threshold
@@ -171,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+        Debug.Log("Knock");
         isKnockback = false;
     }
 
