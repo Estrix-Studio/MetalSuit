@@ -12,21 +12,27 @@ public class GameUIStateMachine : MonoBehaviour
 
     public Text coinText, gemText, dataText;
 
+    public static int level = 0;
+    public static int coins = 0;
+    public static int gems = 0;
+    public static int data = 0;
 
-   
 
     private void Start()
     {
-        
+        level = SavingManager.LoadLevel();
+        coins = SavingManager.LoadCoins();
+        gems = SavingManager.LoadGem();
+        data = SavingManager.LoadData();
     }
 
     private void Update()
     {
 
       
-            IncrementCoins();
-            IncrementGems();
-            IncrementData();
+            //IncrementCoins();
+            //IncrementGems();
+            //IncrementData();
 
         
  
@@ -82,15 +88,14 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void IncrementCoins()
     {
-        int coins = 0;
-
+        
         coins += 1;
         coinText.text = coins.ToString();
 
     }
     public void IncrementGems()
     {
-        int gems = 0;
+        
 
         gems += 1;
         gemText.text = gems.ToString();
@@ -99,7 +104,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void IncrementData()
     {
-        int data = 0;
+        
         data += 1;
 
         dataText.text = data.ToString();
