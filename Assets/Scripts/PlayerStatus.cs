@@ -1,14 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
-    private PlayerMovement PlayerMovement;
-    private HealthBarController healthBarController;
     private FinishSuitController finishSuitController;
+    private HealthBarController healthBarController;
+    private PlayerMovement PlayerMovement;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var collisionPosition = collision.contacts[0].point;
+        var receivedDamage = 0;
+        float receivedDuration = 0;
+        float receivedForce = 0;
+
+        if (PlayerMovement.GetIsDashing())
+        {
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy == null) return;
+            
+            // Damage the enemy only once during the dash
+            enemy.TakeDamage(10f); // Adjust the damage amount as needed
+            Debug.Log("Hit!!");
+        }
+        else if (collision.transform.CompareTag("Enemy"))
+        {
+            var enemyStatus = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemyStatus != null)
+            {
+                receivedDamage = enemyStatus.GetData().Damage;
+                receivedForce = enemyStatus.GetData().KnockbackForce;
+                receivedDuration = enemyStatus.GetData().KnockbackDuration;
+            }
+
+            TakeDamage(receivedDamage, collisionPosition, receivedForce, receivedDuration);
+        }
+        else if (collision.transform.CompareTag("Obstacle"))
+        {
+            var obstacle = collision.transform.GetComponent<Obstacle>();
+            if (obstacle != null)
+            {
+                receivedDamage = obstacle.damage;
+                receivedForce = obstacle.knockbackForce;
+                receivedDuration = obstacle.knockbackDuration;
+            }
+
+            TakeDamage(receivedDamage, collisionPosition, receivedForce, receivedDuration);
+        }
+
+        else if (collision.transform.CompareTag("Repair"))
+        {
+            Heal(5);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Repair"))
+        {
+            Heal(5);
+            Destroy(other.gameObject);
+        }
+    }
+
     public void Initialize()
     {
         PlayerMovement = GetComponent<PlayerMovement>();
@@ -17,30 +79,17 @@ public class PlayerStatus : MonoBehaviour
         finishSuitController = FindAnyObjectByType<FinishSuitController>();
         // Initialization code here, if needed
     }
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
 
     public void TakeDamage(int damage, Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
     {
-        Debug.Log("OUCH");
-        if (currentHealth > 0)
-        {
-            currentHealth -= damage;
-            healthBarController.Damage(damage);
+        if (currentHealth <= 0) return;
+        currentHealth -= damage;
+        healthBarController.Damage(damage);
 
-            if(finishSuitController != null) 
-            {
-                finishSuitController.SuitDestruction(currentHealth, maxHealth);
-            }
+        if (finishSuitController != null) finishSuitController.SuitDestruction(currentHealth, maxHealth);
 
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
-            PlayerMovement.TakeDamage(damageSourcePosition,  knockbackForce,  knockbackDuration);
-        }
+        if (currentHealth <= 0) Die();
+        PlayerMovement.TakeDamage(damageSourcePosition, knockbackForce, knockbackDuration);
     }
 
     public void Heal(int amount)
@@ -60,66 +109,4 @@ public class PlayerStatus : MonoBehaviour
         Debug.Log("Player has died!");
         // You may want to add more logic here, such as respawning the player or triggering a game over.
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Vector3 collisionPosition = collision.contacts[0].point;
-        int recivedDamage =0;
-        float recivedForce =0;
-        float recivedDuration = 0;
-
-        if (PlayerMovement.GetIsDashing())
-        {
-            EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
-            if (enemyStatus != null)
-            {
-                // Damage the enemy only once during the dash
-                enemyStatus.TakeDamage(10f); // Adjust the damage amount as needed
-                Debug.Log("Hit!!");
-            }
-        }
-        else if(collision.transform.tag == "Enemy")
-        {
-           
-            EnemyStatus enemyStatus = collision.gameObject.GetComponent<EnemyStatus>();
-
-            if(enemyStatus != null) 
-            {
-                recivedDamage = enemyStatus.damage;
-                recivedForce =enemyStatus.knockbackForce;
-                recivedDuration =enemyStatus.knockbackDuration;
-            }
-            TakeDamage(recivedDamage, collisionPosition, recivedForce, recivedDuration);
-        }
-        else if (collision.transform.tag == "Obstacle")
-        {
-            Obstacle obstacle = collision.transform.GetComponent<Obstacle>();
-            if (obstacle != null)
-            {
-                recivedDamage = obstacle.damage;
-                recivedForce = obstacle.knockbackForce;
-                recivedDuration = obstacle.knockbackDuration;
-            }
-
-            TakeDamage(recivedDamage, collisionPosition, recivedForce, recivedDuration);
-        }
-
-        else if( collision.transform.tag == "Repair")
-        {
-            Heal(5);
-            Destroy(collision.gameObject);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "Repair")
-        {
-            Heal(5);
-            Destroy(other.gameObject);
-        }
-    }
-
 }
-
-
