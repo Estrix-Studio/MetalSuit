@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
             MovePlayer(direction.normalized);
+            SoundManager.instance.PlayerSound(Sound.Walk);
         }
         else if (!isDashing && !isUsingSwipe && !isKnockback)
         {
@@ -174,5 +175,13 @@ public class PlayerMovement : MonoBehaviour
     {
         PrimaryContact = swipeAction;
         PrimaryPosition = tap;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            SoundManager.instance.PlayerSound(Sound.PlayerHit);
+        }
     }
 }
