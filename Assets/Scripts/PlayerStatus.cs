@@ -93,7 +93,7 @@ public class PlayerStatus : MonoBehaviour
         }
         else if (collision.transform.tag == "Obstacle")
         {
-            Obstacle obstacle = collision.transform.parent.GetComponent<Obstacle>();
+            Obstacle obstacle = collision.transform.GetComponent<Obstacle>();
             if (obstacle != null)
             {
                 recivedDamage = obstacle.damage;
