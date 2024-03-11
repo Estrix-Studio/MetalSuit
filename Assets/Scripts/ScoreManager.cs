@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField]
-    float totalScore, currentScore;
+    [SerializeField] private float totalScore, currentScore;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         totalScore = 0.0f;
         currentScore = 0.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     public void AddScore(float score)
@@ -26,8 +22,8 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void ResetCurrentScore()
-    { 
-        currentScore = 0.0f; 
+    {
+        currentScore = 0.0f;
     }
 
     public void UpdateTotalScore()

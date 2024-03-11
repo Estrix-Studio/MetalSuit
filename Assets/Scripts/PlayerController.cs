@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
-    private Vector2 moveInputValue;
-
     [SerializeField] private float speed;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundPoint;
+    private Vector2 moveInputValue;
+    private Rigidbody rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        Run();
     }
 
     private void OnMove_IA(InputValue value)
@@ -32,13 +33,8 @@ public class PlayerController : MonoBehaviour
 
     private void Run()
     {
-        Vector3 result = new Vector3(moveInputValue.x, 0, moveInputValue.y) * speed * Time.fixedDeltaTime;
+        var result = new Vector3(moveInputValue.x, 0, moveInputValue.y) * speed * Time.fixedDeltaTime;
         result.y = rb.velocity.y;
         rb.velocity = result;
-    }
-
-    private void FixedUpdate()
-    {
-        Run();
     }
 }

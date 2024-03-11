@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIStateMachine : MonoBehaviour
 {
     public GameObject playScreen, finishBar, WinScreen, LoseScreen;
- 
+
 
     public Text coinText, gemText, dataText;
 
@@ -43,20 +39,16 @@ public class GameUIStateMachine : MonoBehaviour
         playScreen.SetActive(true);
         LoseScreen.SetActive(false);
         WinScreen.SetActive(false);
-
-        
     }
 
     public void AddProgressBar()
     {
         finishBar.SetActive(true);
         playScreen.SetActive(true);
-
     }
 
     public void ChangeToWinScreen()
     {
-
         GamePause();
 
         playScreen.SetActive(false);
@@ -67,7 +59,6 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void ChangeToLoseScreen()
     {
-
         GamePause();
         playScreen.SetActive(false);
         LoseScreen.SetActive(true);
@@ -76,12 +67,12 @@ public class GameUIStateMachine : MonoBehaviour
     }
 
 
-    void GamePause()
+    private void GamePause()
     {
         Time.timeScale = 0;
     }
 
-    void GameResume()
+    private void GameResume()
     {
         Time.timeScale = 1;
     }
@@ -91,15 +82,14 @@ public class GameUIStateMachine : MonoBehaviour
         
         coins += 1;
         coinText.text = coins.ToString();
-
     }
+
     public void IncrementGems()
     {
         
 
         gems += 1;
         gemText.text = gems.ToString();
-
     }
 
     public void IncrementData()
@@ -108,15 +98,10 @@ public class GameUIStateMachine : MonoBehaviour
         data += 1;
 
         dataText.text = data.ToString();
-
     }
 
     public void CloseProgram()
     {
         Application.Quit();
-       
     }
-
-
-
 }

@@ -1,99 +1,83 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FinishSuitController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject finishBar, finishSuitLeftLeg, finishSuitRightLeg, finishSuitChest, finishSuitRightArm, finishSuitLeftArm, finishSuitHead, finishSuitDecal;
+    [SerializeField] private GameObject finishBar,
+        finishSuitLeftLeg,
+        finishSuitRightLeg,
+        finishSuitChest,
+        finishSuitRightArm,
+        finishSuitLeftArm,
+        finishSuitHead,
+        finishSuitDecal;
 
-    [SerializeField]
-    float suitProgress, requiredScore = 1000.0f;
+    [SerializeField] private float suitProgress, requiredScore = 1000.0f;
 
-    Vector3 finishBarBaseScale;
+    private Vector3 _finishBarBaseScale;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         suitProgress = 0.0f;
-        finishBarBaseScale = finishBar.transform.localScale;
+        _finishBarBaseScale = finishBar.transform.localScale;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //determines what parts of the suit to activate based on how much progress the player made, based on their score
     public void BuildSuit(float score)
     {
         suitProgress += score;
 
-        float progresspercentage = requiredScore / suitProgress;
-        finishBar.transform.localScale = new Vector3(finishBarBaseScale.x * progresspercentage, finishBarBaseScale.y, finishBarBaseScale.z);
+        var progresspercentage = requiredScore / suitProgress;
+        finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage, _finishBarBaseScale.y,
+            _finishBarBaseScale.z);
 
-        if(progresspercentage >= 0.15f)
+        switch (progresspercentage)
         {
-            finishSuitLeftLeg.SetActive(true);
-            if(progresspercentage >= 0.3f)
-            {  
+            case >= 1.0f:
+                finishSuitDecal.SetActive(true);
+                break;
+            case >= 0.8f:
+                finishSuitHead.SetActive(true);
+                break;
+            case >= 0.65f:
+                finishSuitRightArm.SetActive(true);
+                break;
+            case >= 0.55f:
+                finishSuitLeftArm.SetActive(true);
+                break;
+            case >= 0.45f:
+                finishSuitChest.SetActive(true);
+                break;
+            case >= 0.3f:
                 finishSuitRightLeg.SetActive(true);
-
-                if(progresspercentage >= 0.45f)
-                {
-                    finishSuitChest.SetActive(true);
-
-                    if(progresspercentage >= 0.55f)
-                    {
-                        finishSuitLeftArm.SetActive(true);
-
-                        if(progresspercentage >= 0.65f)
-                        {
-                            finishSuitRightArm.SetActive(true);
-
-                            if(progresspercentage >= 0.8f)
-                            {
-                                finishSuitHead.SetActive(true);
-
-                                if(progresspercentage >= 1.0f)
-                                {
-                                    finishSuitDecal.SetActive(true);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+                break;
+            case >= 0.15f:
+                finishSuitLeftLeg.SetActive(true);
+                break;
         }
     }
 
     public void SuitDestruction(int currentHealth, int maxHealth)
     {
         float healthPercentage = currentHealth / maxHealth;
-        if(healthPercentage <= 80)
+        switch (healthPercentage)
         {
-            DestroyPart(finishSuitHead);
-            if(healthPercentage <= 70)
-            {
+            case <= 0:
+                DestroyPart(finishSuitChest);
+                break;
+            case <= 25:
+                DestroyPart(finishSuitRightLeg);
+                break;
+            case <= 40:
+                DestroyPart(finishSuitLeftLeg);
+                break;
+            case <= 55:
+                DestroyPart(finishSuitRightArm);
+                break;
+            case <= 70:
                 DestroyPart(finishSuitLeftArm);
-                if(healthPercentage <= 55)
-                {
-                    DestroyPart(finishSuitRightArm);
-                    if (healthPercentage <= 40)
-                    {
-                        DestroyPart(finishSuitLeftLeg);
-                        if(healthPercentage <=25)
-                        {
-                            DestroyPart(finishSuitRightLeg);
-                            if (healthPercentage <= 0)
-                            {
-                                DestroyPart(finishSuitChest);
-                            }
-                        }
-                    }
-                }
-            }
+                break;
+            case <= 80:
+                DestroyPart(finishSuitHead);
+                break;
         }
     }
 
