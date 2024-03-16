@@ -26,10 +26,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastMoveDirection;
     private Vector2 swipeStartPosition;
 
+    float clampedMagnitude;
+
     private void Start()
     {
         PrimaryContact.action.started += ctx => OnStartTouchPrimary(ctx);
         PrimaryContact.action.canceled += ctx => OnEndTouchPrimary(ctx);
+
         //PrimaryPosition.action.performed += _ => OnTapPerformed();
     }
 
@@ -38,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
         if (isUsingSwipe && !isKnockback)
         {
             direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
+            clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) /600f;
+            direction = direction.normalized; // Normalize the direction vector
+
+            Debug.Log(clampedMagnitude);
             MovePlayer(direction.normalized);
             SoundManager.instance.PlayerSound(Sound.Walk);
         }
@@ -94,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         var desiredVelocity = lastMoveDirection * moveSpeed;
 
         // Clamp the magnitude of the velocity to the maximum speed
-        if (desiredVelocity.magnitude > maxSpeed) desiredVelocity = desiredVelocity.normalized * maxSpeed;
+        if (desiredVelocity.magnitude > maxSpeed * clampedMagnitude) desiredVelocity = desiredVelocity.normalized * maxSpeed * clampedMagnitude;
 
         // Apply the velocity change
         GetComponent<Rigidbody>().velocity = desiredVelocity;
@@ -120,8 +127,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Swipe");
         if (!isUsingSwipe)
         {
-            isUsingSwipe = true;
             swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
+            isUsingSwipe = true;    
         }
     }
 
