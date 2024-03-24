@@ -11,6 +11,7 @@ public class PlayerStatus : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        finishSuitController = GetComponent<FinishSuitController>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,6 +46,8 @@ public class PlayerStatus : MonoBehaviour
         else if (collision.transform.CompareTag("Obstacle"))
         {
             var obstacle = collision.transform.GetComponent<Obstacle>();
+            if (obstacle == null)
+                obstacle = collision.transform.parent.transform.GetComponent<Obstacle>();
             if (obstacle != null)
             {
                 receivedDamage = obstacle.damage;
@@ -86,7 +89,8 @@ public class PlayerStatus : MonoBehaviour
         currentHealth -= damage;
         healthBarController.Damage(damage);
 
-        if (finishSuitController != null) finishSuitController.SuitDestruction(currentHealth, maxHealth);
+        if (finishSuitController != null) 
+            finishSuitController.SuitDestruction(currentHealth, maxHealth);
 
         if (currentHealth <= 0) Die();
         PlayerMovement.TakeDamage(damageSourcePosition, knockbackForce, knockbackDuration);

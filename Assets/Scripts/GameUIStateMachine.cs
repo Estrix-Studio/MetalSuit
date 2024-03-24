@@ -8,16 +8,30 @@ public class GameUIStateMachine : MonoBehaviour
 
     public Text coinText, gemText, dataText;
 
+    public static int level = 0;
+    public static int coins = 0;
+    public static int gems = 0;
+    public static int data = 0;
+
 
     private void Start()
     {
+        level = SavingManager.LoadLevel();
+        coins = SavingManager.LoadCoins();
+        gems = SavingManager.LoadGem();
+        data = SavingManager.LoadData();
     }
 
     private void Update()
     {
-        IncrementCoins();
-        IncrementGems();
-        IncrementData();
+
+      
+            //IncrementCoins();
+            //IncrementGems();
+            //IncrementData();
+
+        
+ 
     }
 
     public void ChangeToPlayScreen()
@@ -65,15 +79,14 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void IncrementCoins()
     {
-        var coins = 0;
-
+        
         coins += 1;
         coinText.text = coins.ToString();
     }
 
     public void IncrementGems()
     {
-        var gems = 0;
+        
 
         gems += 1;
         gemText.text = gems.ToString();
@@ -81,7 +94,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void IncrementData()
     {
-        var data = 0;
+        
         data += 1;
 
         dataText.text = data.ToString();

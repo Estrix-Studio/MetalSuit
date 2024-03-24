@@ -34,4 +34,9 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenuScreen");
     }
+
+    public void SaveButton_Pressed()
+    {
+        SavingManager.SaveGame(GameUIStateMachine.level, GameUIStateMachine.coins, GameUIStateMachine.gems, GameUIStateMachine.data);
+    }
 }
