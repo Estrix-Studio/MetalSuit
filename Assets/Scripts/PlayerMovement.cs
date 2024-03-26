@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
             clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) /600f;
             direction = direction.normalized; // Normalize the direction vector
 
-            Debug.Log(clampedMagnitude);
             MovePlayer(direction.normalized);
             SoundManager.instance.PlayerSound(Sound.Walk);
         }
