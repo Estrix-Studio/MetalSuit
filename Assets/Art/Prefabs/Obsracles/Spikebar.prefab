@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1639895229284218170}
   - component: {fileID: 6792724303107519733}
   - component: {fileID: 708886501424869352}
+  - component: {fileID: 8108911147539696268}
   m_Layer: 0
   m_Name: Spikebar
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,3 +136,19 @@ CapsuleCollider:
   m_Height: 6.49012
   m_Direction: 2
   m_Center: {x: -1.22, y: 1.75, z: -0.071112625}
+--- !u!208 &8108911147539696268
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2175568396620752669}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.2240001, y: 0.53900003, z: 2.9580002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.2270001, y: 1.7860001, z: 0.001}
+  m_TimeToStationary: 0.5

@@ -1,74 +1,87 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 20;
     [SerializeField] private float dashForce = 50f;
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float slowdownThreshold = 1f;
-    [SerializeField] private float maxDashDuration = 1f;
-
-    private Vector3 dashStartPosition;
-    private Vector2 swipeStartPosition;
-    private Vector2 direction;
-    private Vector3 lastMoveDirection;
-
-    private bool isDashing = false;
-    private float dashTimer = 0f;
-
-    private bool isUsingSwipe = false;
-
-    private bool isKnockback = false;
+    [SerializeField] private float maxDashDuration = .5f;
+    [SerializeField] private float maxSpeed = 20;
 
     [SerializeField] private InputActionReference PrimaryContact;
     [SerializeField] private InputActionReference PrimaryPosition;
 
-    public void Initialize()
-    {
+    private Vector3 dashStartPosition;
+    private float dashTimer;
+    private Vector2 direction;
 
-        // Initialization code here, if needed
-    }
+    private bool isDashing;
+
+    private bool isKnockback;
+
+    private bool isUsingSwipe;
+    private Vector3 lastMoveDirection;
+    private Vector2 swipeStartPosition;
+
+    float clampedMagnitude;
 
     private void Start()
     {
         PrimaryContact.action.started += ctx => OnStartTouchPrimary(ctx);
         PrimaryContact.action.canceled += ctx => OnEndTouchPrimary(ctx);
+
         //PrimaryPosition.action.performed += _ => OnTapPerformed();
     }
 
     private void FixedUpdate()
     {
-        if (!isDashing && isUsingSwipe)
+        if (isUsingSwipe && !isKnockback)
         {
             direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
+            clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) /600f;
+            direction = direction.normalized; // Normalize the direction vector
+
             MovePlayer(direction.normalized);
+            SoundManager.instance.PlayerSound(Sound.Walk);
+        }
+        else if (!isDashing && !isUsingSwipe && !isKnockback)
+        {
+            // Stop the player from sliding
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         // If the player is dashing
-        if (isDashing)
+        BrakeDash();
+    }
+
+    public void Initialize()
+    {
+        // Initialization code here, if needed
+    }
+
+
+    private void BrakeDash()
+    {
+        if (isDashing && !isKnockback)
         {
             dashTimer += Time.fixedDeltaTime;
-
-            // Check if the elapsed time exceeds the max dash duration
-            if (dashTimer >= maxDashDuration)
+            // Apply slowdown only when the remaining distance is less than the slowdown threshold
+            var remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
+            if (remainingDistance < slowdownThreshold)
             {
-                isDashing = false;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-                dashStartPosition = transform.position;
-                dashTimer = 0f; // Reset the dash timer
-            }
-            else
-            {
-                // Apply slowdown only when the remaining distance is less than the slowdown threshold
-                float remainingDistance = dashDistance - Vector3.Distance(dashStartPosition, transform.position);
-                if (remainingDistance < slowdownThreshold)
+                var slowdownFactor = remainingDistance / slowdownThreshold;
+                GetComponent<Rigidbody>().velocity *= slowdownFactor;
+                if (GetComponent<Rigidbody>().velocity.sqrMagnitude == 0 || dashTimer >= maxDashDuration)
                 {
-                    float slowdownFactor = remainingDistance / slowdownThreshold;
-                    GetComponent<Rigidbody>().velocity *= slowdownFactor;
+                    isDashing = false;
+                    dashTimer = 0f;
                 }
             }
+
+            Debug.Log("Braking");
         }
     }
 
@@ -79,12 +92,33 @@ public class PlayerMovement : MonoBehaviour
         // Rotate the player to face in the direction of movement only if the player is moving
         if (lastMoveDirection != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
+            var toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, moveSpeed * Time.deltaTime);
         }
 
-        Vector3 movement = lastMoveDirection * moveSpeed * Time.deltaTime;
-        GetComponent<Rigidbody>().MovePosition(transform.position + movement);
+        // Calculate the desired velocity
+        var desiredVelocity = lastMoveDirection * moveSpeed;
+
+        // Clamp the magnitude of the velocity to the maximum speed
+        if (desiredVelocity.magnitude > maxSpeed * clampedMagnitude) desiredVelocity = desiredVelocity.normalized * maxSpeed * clampedMagnitude;
+
+        // Apply the velocity change
+        GetComponent<Rigidbody>().velocity = desiredVelocity;
+    }
+
+
+    private void Dash()
+    {
+        if (!isDashing)
+        {
+            isDashing = true;
+            dashStartPosition = transform.position;
+
+            var dashDirection = lastMoveDirection;
+            dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+
+            GetComponent<Rigidbody>().AddForce(dashDirection.normalized * dashForce, ForceMode.Impulse);
+        }
     }
 
     private void OnStartTouchPrimary(InputAction.CallbackContext context)
@@ -92,8 +126,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Swipe");
         if (!isUsingSwipe)
         {
-            isUsingSwipe = true;
             swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
+            isUsingSwipe = true;    
         }
     }
 
@@ -102,28 +136,13 @@ public class PlayerMovement : MonoBehaviour
         isUsingSwipe = false;
         Dash();
     }
+
     private void OnTapPerformed()
     {
         Debug.Log("Tap");
-        if (!isDashing)
-        {
-            Dash();
-        }
+        if (!isDashing) Dash();
     }
-    private void Dash()
-    {
-        if (!isDashing)
-        {
-            isDashing = true;
-            dashStartPosition = transform.position;
 
-            Vector3 dashDirection = lastMoveDirection;
-            dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
-
-            GetComponent<Rigidbody>().velocity = dashDirection.normalized * dashForce;
-            dashTimer = 0f; // Reset the dash timer
-        }
-    }
 
     public bool GetIsDashing()
     {
@@ -139,12 +158,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
+    private IEnumerator Knockback(Vector3 damageSourcePosition, float knockbackForce, float knockbackDuration)
     {
         isKnockback = true;
 
         // Calculate the direction away from the damage source
-        Vector3 knockbackDirection = (transform.position - damageSourcePosition).normalized;
+        var knockbackDirection = (transform.position - damageSourcePosition).normalized;
 
         // Apply force to the Rigidbody
         GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
@@ -154,12 +173,21 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+        Debug.Log("Knock");
         isKnockback = false;
     }
 
     public void SetupMobileInput(InputActionReference swipeAction, InputActionReference tap)
     {
-        this.PrimaryContact = swipeAction;
-        this.PrimaryPosition = tap;
+        PrimaryContact = swipeAction;
+        PrimaryPosition = tap;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            SoundManager.instance.PlayerSound(Sound.PlayerHit);
+        }
     }
 }
