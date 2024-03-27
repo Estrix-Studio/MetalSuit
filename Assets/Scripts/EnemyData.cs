@@ -7,6 +7,7 @@ public class EnemyData : ScriptableObject
     public EnemyType EnemyType;
     public float DetectionRange;
     public float MaxHealth;
+    public float FireRate;
     public int Damage;
     public float KnockbackForce;
     public float KnockbackDuration;

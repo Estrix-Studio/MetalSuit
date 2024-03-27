@@ -149,8 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c806b27b6104f93499c90e3dcd63f229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 0a5605784318a9a4b93ddce5f2db9d82, type: 2}
+  Data: {fileID: 11400000, guid: 9f7bab6401cf93243a3376881f3dba6a, type: 2}
   currentHealth: 0
+  projectilePrefab: {fileID: 0}
+  maxProjectiles: 3
+  fireRate: 1
 --- !u!195 &4318298040498468275
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   EnemyType: 0
   DetectionRange: 10
   MaxHealth: 20
+  FireRate: 0
   Damage: 10
   KnockbackForce: 20
   KnockbackDuration: 0.2
