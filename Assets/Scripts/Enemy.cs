@@ -3,13 +3,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public static EnemyData Data = new EnemyData(EnemyType.Melee, 10, 50, 10, 20, .5f );
+    public EnemyData Data;
 
     private Transform player;
 
 
     [SerializeField]
-    private float maxHealth = Data.MaxHealth;
     private float currentHealth;
 
     private NavMeshAgent navMeshAgent;

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5592262642888001194}
   - component: {fileID: 4318298040498468275}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: MeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c806b27b6104f93499c90e3dcd63f229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  Data: {fileID: 11400000, guid: 0a5605784318a9a4b93ddce5f2db9d82, type: 2}
+  currentHealth: 0
 --- !u!195 &4318298040498468275
 NavMeshAgent:
   m_ObjectHideFlags: 0
