@@ -4,34 +4,22 @@ using UnityEngine.UI;
 public class GameUIStateMachine : MonoBehaviour
 {
     public GameObject playScreen, finishBar, WinScreen, LoseScreen;
-
-
     public Text coinText, gemText, dataText;
 
-    public static int level = 0;
-    public static int coins = 0;
-    public static int gems = 0;
-    public static int data = 0;
+    public static PlayerData PlayerData;
 
 
     private void Start()
     {
-        level = SavingManager.LoadLevel();
-        coins = SavingManager.LoadCoins();
-        gems = SavingManager.LoadGem();
-        data = SavingManager.LoadData();
+        PlayerData = SavingManager.LoadGame();
+        if (PlayerData == null) return;
+        coinText.text = PlayerData.Coins.ToString();
+        gemText.text = PlayerData.Gems.ToString();
+        dataText.text = PlayerData.Data.ToString();
     }
 
     private void Update()
     {
-
-      
-            //IncrementCoins();
-            //IncrementGems();
-            //IncrementData();
-
-        
- 
     }
 
     public void ChangeToPlayScreen()
@@ -79,25 +67,23 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void IncrementCoins()
     {
-        
-        coins += 1;
-        coinText.text = coins.ToString();
+        PlayerData.Coins += 1;
+        coinText.text = PlayerData.Coins.ToString();
+        SavingManager.SaveGame(PlayerData);
     }
 
     public void IncrementGems()
     {
-        
-
-        gems += 1;
-        gemText.text = gems.ToString();
+        PlayerData.Gems += 1;
+        gemText.text = PlayerData.Gems.ToString();
+        SavingManager.SaveGame(PlayerData);
     }
 
     public void IncrementData()
     {
-        
-        data += 1;
-
-        dataText.text = data.ToString();
+        PlayerData.Data += 1;
+        dataText.text = PlayerData.Data.ToString();
+        SavingManager.SaveGame(PlayerData);
     }
 
     public void CloseProgram()
