@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -7,8 +6,8 @@ public static class SavingManager
 {
     public static void SaveGame(PlayerData playerData)
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
+        var bf = new BinaryFormatter();
+        var file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
 
         bf.Serialize(file, playerData);
         file.Close();
@@ -19,19 +18,17 @@ public static class SavingManager
     {
         if (File.Exists(Application.persistentDataPath + "/MySaveData.dat"))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/MySaveData.dat", FileMode.Open);
-            PlayerData data = (PlayerData)bf.Deserialize(file);
+            var bf = new BinaryFormatter();
+            var file = File.Open(Application.persistentDataPath + "/MySaveData.dat", FileMode.Open);
+            var data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
             Debug.Log("Game data loaded!");
             return data;
         }
-        else
-        {
-            Debug.LogError("There is no save data!");
-            return null;
-        }
+
+        Debug.LogError("There is no save data!");
+        return null;
     }
 
     public static void ResetData()
@@ -49,6 +46,5 @@ public static class SavingManager
 
     public static void SaveGame()
     {
-        return;
     }
 }

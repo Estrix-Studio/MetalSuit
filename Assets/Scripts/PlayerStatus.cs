@@ -25,7 +25,7 @@ public class PlayerStatus : MonoBehaviour
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy == null) return;
-            
+
             // Damage the enemy only once during the dash
             enemy.TakeDamage(10f); // Adjust the damage amount as needed
             Debug.Log("Hit!!");
@@ -89,7 +89,7 @@ public class PlayerStatus : MonoBehaviour
         currentHealth -= damage;
         healthBarController.Damage(damage);
 
-        if (finishSuitController != null) 
+        if (finishSuitController != null)
             finishSuitController.SuitDestruction(currentHealth, maxHealth);
 
         if (currentHealth <= 0) Die();
