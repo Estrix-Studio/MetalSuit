@@ -1655,6 +1655,7 @@ GameObject:
   - component: {fileID: 160920354}
   - component: {fileID: 160920356}
   - component: {fileID: 160920355}
+  - component: {fileID: 160920357}
   m_Layer: 5
   m_Name: CoinAndGemPanel
   m_TagString: Untagged
@@ -1725,6 +1726,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160920353}
   m_CullTransparentMesh: 1
+--- !u!114 &160920357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160920353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 160920355}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: ToggleCoinAndGemPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &181988961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2406,107 +2463,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234651318}
   m_CullTransparentMesh: 1
---- !u!1 &266873671
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 266873675}
-  - component: {fileID: 266873674}
-  - component: {fileID: 266873673}
-  - component: {fileID: 266873672}
-  m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &266873672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266873671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &266873673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266873671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &266873674
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266873671}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &266873675
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266873671}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1 &267742115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,7 +2681,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 704871441}
         m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
-        m_MethodName: ToggleCoinAndGemPanelExit
+        m_MethodName: ToggleSkinsExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4980,12 +4936,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 664306368}
-  ObjectDragtoPos: {fileID: 0}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!1 &704871436
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,13 +5039,13 @@ RectTransform:
   - {fileID: 1744813530}
   - {fileID: 1751175507}
   - {fileID: 1145666193}
+  - {fileID: 965845129}
   - {fileID: 2024276084}
   - {fileID: 160920354}
   - {fileID: 926883178}
   - {fileID: 1865238019}
   - {fileID: 1960700897}
   - {fileID: 1388760407}
-  - {fileID: 965845129}
   - {fileID: 1237605188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5117,8 +5067,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1960700896}
-  gemAndCoinPanel: {fileID: 0}
+  gemAndCoinPanel: {fileID: 160920353}
   missionPanel: {fileID: 1865238016}
+  skinsPanel: {fileID: 926883177}
   loadingScreen: {fileID: 1237605187}
   loadingBar: {fileID: 1412664713}
 --- !u!1 &712337780
@@ -5217,12 +5168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 712337780}
-  ObjectDragtoPos: {fileID: 0}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!114 &712337784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5863,12 +5808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 747140531}
-  ObjectDragtoPos: {fileID: 0}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!114 &747140535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6863,6 +6802,7 @@ GameObject:
   - component: {fileID: 926883178}
   - component: {fileID: 926883180}
   - component: {fileID: 926883179}
+  - component: {fileID: 926883181}
   m_Layer: 5
   m_Name: SkinsPanel
   m_TagString: Untagged
@@ -6930,6 +6870,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926883177}
   m_CullTransparentMesh: 1
+--- !u!114 &926883181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926883177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 926883179}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: ToggleSettingsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &938339937
 GameObject:
   m_ObjectHideFlags: 0
@@ -7844,12 +7840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 1076587585}
-  ObjectDragtoPos: {fileID: 1211375509}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1076587589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9767,9 +9757,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: b3fdd1c9ce7de044ab142191b3e0a570, type: 3}
+      - m_Target: {fileID: 704871441}
         m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ToggleCoinAndGemPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12121,7 +12111,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1578814910}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: ToggleSkinsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1578814912
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12218,6 +12220,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 0}
   gemAndCoinPanel: {fileID: 0}
   missionPanel: {fileID: 0}
+  skinsPanel: {fileID: 0}
   loadingScreen: {fileID: 0}
   loadingBar: {fileID: 0}
 --- !u!1 &1605224779
@@ -13641,12 +13644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 1829586281}
-  ObjectDragtoPos: {fileID: 0}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1840171351
 GameObject:
   m_ObjectHideFlags: 0
@@ -13785,6 +13782,7 @@ GameObject:
   - component: {fileID: 1865238019}
   - component: {fileID: 1865238018}
   - component: {fileID: 1865238017}
+  - component: {fileID: 1865238020}
   m_Layer: 5
   m_Name: MissionPanelNew
   m_TagString: Untagged
@@ -13854,6 +13852,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0.008138, y: 576.78}
   m_SizeDelta: {x: 1170, y: 1894.773}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1865238020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865238016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1865238017}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: ToggleMissionPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1876199706 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5247482763854237424, guid: 37ce1ec0666c14947ba514ca4bb48bde, type: 3}
@@ -14492,6 +14546,7 @@ GameObject:
   - component: {fileID: 1960700897}
   - component: {fileID: 1960700899}
   - component: {fileID: 1960700898}
+  - component: {fileID: 1960700900}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -14558,6 +14613,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960700896}
   m_CullTransparentMesh: 1
+--- !u!114 &1960700900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960700896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1960700898}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: ToggleSettingsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1969046369
 GameObject:
   m_ObjectHideFlags: 0
@@ -15625,12 +15736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1dae11e3c2f6438c7594c7beed9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 2079079913}
-  ObjectDragtoPos: {fileID: 739564525}
-  DropDistance: 40
-  isLocked: 0
-  originalParent: {fileID: 0}
-  objectInitPos: {x: 0, y: 0, z: 0}
 --- !u!1 &2087465067
 GameObject:
   m_ObjectHideFlags: 0
@@ -16621,4 +16726,3 @@ SceneRoots:
   - {fileID: 1354931246}
   - {fileID: 704871440}
   - {fileID: 1172373479}
-  - {fileID: 266873675}
