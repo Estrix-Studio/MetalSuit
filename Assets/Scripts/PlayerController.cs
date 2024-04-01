@@ -3,17 +3,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static readonly int IsWalking = Animator.StringToHash("isWalking");
+    public static readonly int IsDashing = Animator.StringToHash("isDashing");
     [SerializeField] private float speed;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundPoint;
+    [SerializeField] public Animator Animator;
     private Vector2 _moveInputValue;
     private Rigidbody _rb;
 
-    PlayerMovement playerMovement;
-    [SerializeField] public Animator Animator;
-    public static readonly int IsWalking = Animator.StringToHash("isWalking");
-    public static readonly int IsDashing = UnityEngine.Animator.StringToHash("isDashing");
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         Run();
     }
-    
+
     // Walk/Run function that switch between walk and run animations
     private void Run()
     {
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         Animator.SetBool(IsWalking, _moveInputValue.magnitude > 0);
     }
-    
+
 
     private void OnMove_IA(InputValue value)
     {

@@ -49,7 +49,7 @@ public class FinishSuitController : MonoBehaviour
 
     public void SuitDestruction(float currentHealth, float maxHealth)
     {
-        float healthPercentage = (currentHealth / maxHealth);
+        var healthPercentage = currentHealth / maxHealth;
         Debug.Log(healthPercentage);
         switch (healthPercentage)
         {

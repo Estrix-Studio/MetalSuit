@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,20 +5,43 @@ public class Enemy : MonoBehaviour
 {
     public EnemyData Data;
 
-    private Transform player;
-
     [SerializeField] private float currentHealth;
-
-    private NavMeshAgent navMeshAgent;
-    private float detectionRange;
-    private EnemyType enemyType;
 
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     [SerializeField] private int maxProjectiles = 3; // Maximum number of projectiles
     [SerializeField] private float fireRate = 1.0f; // Fire rate in shots per second
-    private float fireTimer = 0f; // Timer to track firing cooldown
+    private float detectionRange;
+    private EnemyType enemyType;
+    private float fireTimer; // Timer to track firing cooldown
+
+    private NavMeshAgent navMeshAgent;
+
+    private Transform player;
 
     private ProjectileBehavior[] projectiles; // Array to hold projectiles
+
+    private void Start()
+    {
+        Initialize(Data);
+    }
+
+    private void Update()
+    {
+        var distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (distanceToPlayer < detectionRange)
+            switch (enemyType)
+            {
+                case EnemyType.Melee:
+                    navMeshAgent.SetDestination(player.position);
+                    break;
+                case EnemyType.Range:
+                    FireAtPlayer();
+                    break;
+            }
+
+        // Update fire timer
+        fireTimer += Time.deltaTime;
+    }
 
     public void Initialize(EnemyData enemyData)
     {
@@ -34,37 +56,12 @@ public class Enemy : MonoBehaviour
 
         // Initialize projectiles array
         projectiles = new ProjectileBehavior[maxProjectiles];
-        for (int i = 0; i < maxProjectiles; i++)
+        for (var i = 0; i < maxProjectiles; i++)
         {
             GameObject projectileObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectiles[i] = projectileObject.GetComponent<ProjectileBehavior>();
             projectiles[i].gameObject.SetActive(false); // Deactivate the projectile initially
         }
-    }
-
-    private void Start()
-    {
-        Initialize(Data);
-    }
-
-    private void Update()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer < detectionRange)
-        {
-            switch (enemyType)
-            {
-                case EnemyType.Melee:
-                    navMeshAgent.SetDestination(player.position);
-                    break;
-                case EnemyType.Range:
-                    FireAtPlayer();
-                    break;
-            }
-        }
-
-        // Update fire timer
-        fireTimer += Time.deltaTime;
     }
 
     private void FireAtPlayer()
@@ -95,12 +92,8 @@ public class Enemy : MonoBehaviour
     private ProjectileBehavior GetAvailableProjectile()
     {
         foreach (var projectile in projectiles)
-        {
             if (!projectile.gameObject.activeSelf)
-            {
                 return projectile;
-            }
-        }
         return null;
     }
 

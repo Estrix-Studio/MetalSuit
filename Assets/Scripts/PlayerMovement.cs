@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference PrimaryContact;
     [SerializeField] private InputActionReference PrimaryPosition;
 
+    private PlayerController _playerController;
+
+    private float clampedMagnitude;
+
     private Vector3 dashStartPosition;
     private float dashTimer;
     private Vector2 direction;
@@ -25,10 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isUsingSwipe;
     private Vector3 lastMoveDirection;
     private Vector2 swipeStartPosition;
-    
-    private PlayerController _playerController;
-
-    float clampedMagnitude;
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (isUsingSwipe && !isKnockback)
         {
             direction = PrimaryPosition.action.ReadValue<Vector2>() - swipeStartPosition;
-            clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) /600f;
+            clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) / 600f;
             direction = direction.normalized; // Normalize the direction vector
 
             MovePlayer(direction.normalized);
@@ -59,11 +59,16 @@ public class PlayerMovement : MonoBehaviour
         BrakeDash();
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Obstacle") SoundManager.instance.PlayerSound(Sound.PlayerHit);
+    }
+
     public void Initialize()
     {
         // Initialization code here, if needed
-        
-        
+
+
         _playerController = GetComponent<PlayerController>();
     }
 
@@ -100,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         {
             var toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, moveSpeed * Time.deltaTime);
-            
+
             // Set the animator parameter to true
             _playerController.Animator.SetBool(PlayerController.IsWalking, true);
         }
@@ -109,7 +114,8 @@ public class PlayerMovement : MonoBehaviour
         var desiredVelocity = lastMoveDirection * moveSpeed;
 
         // Clamp the magnitude of the velocity to the maximum speed
-        if (desiredVelocity.magnitude > maxSpeed * clampedMagnitude) desiredVelocity = desiredVelocity.normalized * maxSpeed * clampedMagnitude;
+        if (desiredVelocity.magnitude > maxSpeed * clampedMagnitude)
+            desiredVelocity = desiredVelocity.normalized * maxSpeed * clampedMagnitude;
 
         // Apply the velocity change
         GetComponent<Rigidbody>().velocity = desiredVelocity;
@@ -136,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isUsingSwipe)
         {
             swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
-            isUsingSwipe = true;    
+            isUsingSwipe = true;
         }
     }
 
@@ -190,13 +196,5 @@ public class PlayerMovement : MonoBehaviour
     {
         PrimaryContact = swipeAction;
         PrimaryPosition = tap;
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Obstacle")
-        {
-            SoundManager.instance.PlayerSound(Sound.PlayerHit);
-        }
     }
 }

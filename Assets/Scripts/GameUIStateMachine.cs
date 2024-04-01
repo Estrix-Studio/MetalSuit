@@ -3,10 +3,9 @@ using UnityEngine.UI;
 
 public class GameUIStateMachine : MonoBehaviour
 {
+    public static PlayerData PlayerData;
     public GameObject playScreen, finishBar, WinScreen, LoseScreen;
     public Text coinText, gemText, dataText;
-
-    public static PlayerData PlayerData;
 
 
     private void Start()

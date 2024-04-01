@@ -47,7 +47,6 @@ public class CanvasPanelActivate : MonoBehaviour
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
-
     }
 
     public void ToggleSettingsPanel()
@@ -79,7 +78,7 @@ public class CanvasPanelActivate : MonoBehaviour
     {
         missionPanel.SetActive(false);
     }
-    
+
     public void ToggleSkinsPanel()
     {
         skinsPanel.SetActive(true);
@@ -90,9 +89,3 @@ public class CanvasPanelActivate : MonoBehaviour
         skinsPanel.SetActive(false);
     }
 }
-
-
-
-
-
-

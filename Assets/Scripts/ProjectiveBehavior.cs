@@ -5,10 +5,10 @@ public class ProjectileBehavior : MonoBehaviour
     public float lifespan = 2.0f; // Adjust the lifespan as needed
     public float speed = 10f;
 
-    private float timer = 0f;
+    private float timer;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Move the projectile forward in its facing direction
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -17,10 +17,7 @@ public class ProjectileBehavior : MonoBehaviour
         timer += Time.deltaTime;
 
         // Check if the bullet has exceeded its lifespan
-        if (timer >= lifespan)
-        {
-            DeactivateProjectile();
-        }
+        if (timer >= lifespan) DeactivateProjectile();
     }
 
     public void Fire()
