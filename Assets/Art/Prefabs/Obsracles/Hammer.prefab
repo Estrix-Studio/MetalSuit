@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 6629734011053054059}
   - component: {fileID: 5696503121226781383}
   - component: {fileID: 1922516169573597883}
+  - component: {fileID: -5987702914370674163}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -344,6 +345,22 @@ MonoBehaviour:
   - {fileID: 4205571883557520918}
   - {fileID: 1982764980268181194}
   speed: 1
+--- !u!208 &-5987702914370674163
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030913073466201013}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8159446239356246517
 GameObject:
   m_ObjectHideFlags: 0

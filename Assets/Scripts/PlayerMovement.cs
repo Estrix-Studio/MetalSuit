@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isUsingSwipe;
     private Vector3 lastMoveDirection;
     private Vector2 swipeStartPosition;
+    
+    private PlayerController _playerController;
 
     float clampedMagnitude;
 
@@ -44,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
             clampedMagnitude = Mathf.Clamp(direction.magnitude, 0f, 600f) /600f;
             direction = direction.normalized; // Normalize the direction vector
 
-            Debug.Log(clampedMagnitude);
             MovePlayer(direction.normalized);
             SoundManager.instance.PlayerSound(Sound.Walk);
         }
@@ -61,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
     public void Initialize()
     {
         // Initialization code here, if needed
+        
+        
+        _playerController = GetComponent<PlayerController>();
     }
 
 
@@ -79,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isDashing = false;
                     dashTimer = 0f;
+                    _playerController.Animator.SetBool(PlayerController.IsDashing, false);
                 }
             }
 
@@ -95,6 +100,9 @@ public class PlayerMovement : MonoBehaviour
         {
             var toRotation = Quaternion.LookRotation(lastMoveDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, moveSpeed * Time.deltaTime);
+            
+            // Set the animator parameter to true
+            _playerController.Animator.SetBool(PlayerController.IsWalking, true);
         }
 
         // Calculate the desired velocity
@@ -110,16 +118,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        if (!isDashing)
-        {
-            isDashing = true;
-            dashStartPosition = transform.position;
+        if (isDashing) return;
+        isDashing = true;
+        dashStartPosition = transform.position;
 
-            var dashDirection = lastMoveDirection;
-            dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
+        var dashDirection = lastMoveDirection;
+        dashDirection.y = 0; // Ensure the dash is only on the X-Z plane
 
-            GetComponent<Rigidbody>().AddForce(dashDirection.normalized * dashForce, ForceMode.Impulse);
-        }
+        GetComponent<Rigidbody>().AddForce(dashDirection.normalized * dashForce, ForceMode.Impulse);
+        _playerController.Animator.SetBool(PlayerController.IsWalking, false);
+        _playerController.Animator.SetBool(PlayerController.IsDashing, true);
     }
 
     private void OnStartTouchPrimary(InputAction.CallbackContext context)

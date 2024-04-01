@@ -8,6 +8,7 @@ public class CanvasPanelActivate : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject gemAndCoinPanel;
     public GameObject missionPanel;
+    public GameObject skinsPanel;
     public GameObject loadingScreen;
     public Slider loadingBar;
 
@@ -46,5 +47,52 @@ public class CanvasPanelActivate : MonoBehaviour
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
+
+    }
+
+    public void ToggleSettingsPanel()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    public void ToggleSettingsExitPanel()
+    {
+        settingsPanel.SetActive(false);
+    }
+
+    public void ToggleCoinAndGemPanel()
+    {
+        gemAndCoinPanel.SetActive(!gemAndCoinPanel.activeSelf);
+    }
+
+    public void ToggleCoinAndGemPanelExit()
+    {
+        gemAndCoinPanel.SetActive(false);
+    }
+
+    public void ToggleMissionPanel()
+    {
+        missionPanel.SetActive(true);
+    }
+
+    public void ToggleMissionPanelExit()
+    {
+        missionPanel.SetActive(false);
+    }
+    
+    public void ToggleSkinsPanel()
+    {
+        skinsPanel.SetActive(true);
+    }
+
+    public void ToggleSkinsExit()
+    {
+        skinsPanel.SetActive(false);
     }
 }
+
+
+
+
+
+

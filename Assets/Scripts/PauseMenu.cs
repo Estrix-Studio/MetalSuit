@@ -37,6 +37,6 @@ public class PauseMenu : MonoBehaviour
 
     public void SaveButton_Pressed()
     {
-        SavingManager.SaveGame(GameUIStateMachine.level, GameUIStateMachine.coins, GameUIStateMachine.gems, GameUIStateMachine.data);
+        SavingManager.SaveGame();
     }
 }
