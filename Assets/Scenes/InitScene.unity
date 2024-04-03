@@ -3539,6 +3539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531957670}
+  - component: {fileID: 1531957671}
   m_Layer: 0
   m_Name: LevelRoad
   m_TagString: Untagged
@@ -3572,6 +3573,21 @@ Transform:
   - {fileID: 2134012492}
   m_Father: {fileID: 1094288032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531957671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531957669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c708fa3df54b6bc4e992c7d385dacf19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallThickness: 0.1
+  offsetDistance: 0.1
+  rayColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1533253341 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7583488070218740092, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
@@ -4714,6 +4730,10 @@ PrefabInstance:
       propertyPath: finishSuitDecal
       value: 
       objectReference: {fileID: 503608661}
+    - target: {fileID: 9070876807896722033, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 2be377b7f412e20459c29276f31f45b2, type: 2}
     m_RemovedComponents:
     - {fileID: 7444304075083366468, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
     m_RemovedGameObjects: []

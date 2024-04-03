@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // Stop the player from sliding
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().freezeRotation = true;
         }
 
         // If the player is dashing
@@ -91,8 +92,6 @@ public class PlayerMovement : MonoBehaviour
                     _playerController.Animator.SetBool(PlayerController.IsDashing, false);
                 }
             }
-
-            Debug.Log("Braking");
         }
     }
 
@@ -138,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnStartTouchPrimary(InputAction.CallbackContext context)
     {
-        Debug.Log("Swipe");
         if (!isUsingSwipe)
         {
             swipeStartPosition = PrimaryPosition.action.ReadValue<Vector2>();
