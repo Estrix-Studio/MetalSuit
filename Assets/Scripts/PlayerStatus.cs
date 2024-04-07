@@ -67,6 +67,8 @@ public class PlayerStatus : MonoBehaviour
             Heal(5);
             Destroy(collision.gameObject);
         }
+        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,6 +77,10 @@ public class PlayerStatus : MonoBehaviour
         {
             Heal(5);
             Destroy(other.gameObject);
+        }
+        else if (other.transform.CompareTag("FinishLine"))
+        {
+            gameUIStateMachine.ChangeToWinScreen();
         }
     }
 
@@ -99,7 +105,6 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
-            gameUIStateMachine.ChangeToLoseScreen();
         }
            
         PlayerMovement.TakeDamage(damageSourcePosition, knockbackForce, knockbackDuration);
@@ -120,6 +125,7 @@ public class PlayerStatus : MonoBehaviour
     {
         // Handle player death
         Debug.Log("Player has died!");
+        gameUIStateMachine.ChangeToLoseScreen();
         // You may want to add more logic here, such as respawning the player or triggering a game over.
     }
 }

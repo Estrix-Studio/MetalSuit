@@ -4276,14 +4276,6 @@ PrefabInstance:
       value: FinishTriggerMat
       objectReference: {fileID: 0}
     - target: {fileID: 6444799712873944731, guid: 38354c4b60c842c47a136b926c4cd35f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6444799712873944731, guid: 38354c4b60c842c47a136b926c4cd35f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 6444799712873944731, guid: 38354c4b60c842c47a136b926c4cd35f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30
       objectReference: {fileID: 0}
