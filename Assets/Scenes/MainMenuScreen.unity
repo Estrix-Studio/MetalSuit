@@ -5032,6 +5032,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1933520458}
+  - {fileID: 204806493}
   - {fileID: 1267933732}
   - {fileID: 1578814909}
   - {fileID: 1744813530}
@@ -5039,6 +5040,7 @@ RectTransform:
   - {fileID: 327972753}
   - {fileID: 1145666193}
   - {fileID: 453169708}
+  - {fileID: 1034143642}
   - {fileID: 965845129}
   - {fileID: 2024276084}
   - {fileID: 160920354}
@@ -5047,8 +5049,6 @@ RectTransform:
   - {fileID: 1960700897}
   - {fileID: 1388760407}
   - {fileID: 1237605188}
-  - {fileID: 1034143642}
-  - {fileID: 204806493}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13227,7 +13227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 937237391001145621, guid: e76b6c8ef0618e04592af6e49c2d8e01, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 938949040923437526, guid: e76b6c8ef0618e04592af6e49c2d8e01, type: 3}
       propertyPath: m_Layer

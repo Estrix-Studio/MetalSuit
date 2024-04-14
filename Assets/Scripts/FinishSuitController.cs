@@ -23,28 +23,33 @@ public class FinishSuitController : MonoBehaviour
     {
         suitProgress += score;
 
-        var progresspercentage = requiredScore / suitProgress;
-        finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage, _finishBarBaseScale.y,
-            _finishBarBaseScale.z);
-
-        switch (progresspercentage)
+        if (finishBar)
         {
-            case >= 1.0f:
-                finishSuitDecal.SetActive(true);
-                break;
-            case >= 0.8f:
-                finishSuitHead.SetActive(true);
-                break;
-            case >= 0.6f:
-                finishSuitArms.SetActive(true);
-                break;
-            case >= 0.45f:
-                finishSuitChest.SetActive(true);
-                break;
-            case >= 0.25f:
-                finishSuitLegs.SetActive(true);
-                break;
+            var progresspercentage = requiredScore / suitProgress;
+            finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage, _finishBarBaseScale.y,
+                _finishBarBaseScale.z);
+
+            switch (progresspercentage)
+            {
+                case >= 1.0f:
+                    finishSuitDecal.SetActive(true);
+                    break;
+                case >= 0.8f:
+                    finishSuitHead.SetActive(true);
+                    break;
+                case >= 0.6f:
+                    finishSuitArms.SetActive(true);
+                    break;
+                case >= 0.45f:
+                    finishSuitChest.SetActive(true);
+                    break;
+                case >= 0.25f:
+                    finishSuitLegs.SetActive(true);
+                    break;
+            }
         }
+
+        
     }
 
     public void SuitDestruction(float currentHealth, float maxHealth)
