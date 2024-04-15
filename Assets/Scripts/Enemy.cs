@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         projectiles = new ProjectileBehavior[maxProjectiles];
         for (var i = 0; i < maxProjectiles; i++)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            var projectileObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectiles[i] = projectileObject.GetComponent<ProjectileBehavior>();
             projectiles[i].gameObject.SetActive(false); // Deactivate the projectile initially
         }
@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
         if (fireTimer >= 1 / fireRate)
         {
             // Find an inactive projectile to fire
-            ProjectileBehavior availableProjectile = GetAvailableProjectile();
+            var availableProjectile = GetAvailableProjectile();
             if (availableProjectile != null)
             {
                 // Aim at the player

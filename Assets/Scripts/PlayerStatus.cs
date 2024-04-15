@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    private GameUIStateMachine gameUIStateMachine;
     private int currentHealth;
     private FinishSuitController finishSuitController;
+    private GameUIStateMachine gameUIStateMachine;
     private HealthBarController healthBarController;
     private PlayerMovement PlayerMovement;
 
@@ -14,8 +14,7 @@ public class PlayerStatus : MonoBehaviour
     {
         currentHealth = maxHealth;
         finishSuitController = GetComponent<FinishSuitController>();
-        gameUIStateMachine = GameObject.FindObjectOfType<GameUIStateMachine>();
-
+        gameUIStateMachine = FindObjectOfType<GameUIStateMachine>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,8 +66,6 @@ public class PlayerStatus : MonoBehaviour
             Heal(5);
             Destroy(collision.gameObject);
         }
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,11 +99,8 @@ public class PlayerStatus : MonoBehaviour
         if (finishSuitController != null)
             finishSuitController.SuitDestruction(currentHealth, maxHealth);
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-           
+        if (currentHealth <= 0) Die();
+
         PlayerMovement.TakeDamage(damageSourcePosition, knockbackForce, knockbackDuration);
     }
 

@@ -26,7 +26,8 @@ public class FinishSuitController : MonoBehaviour
         if (finishBar)
         {
             var progresspercentage = requiredScore / suitProgress;
-            finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage, _finishBarBaseScale.y,
+            finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage,
+                _finishBarBaseScale.y,
                 _finishBarBaseScale.z);
 
             switch (progresspercentage)
@@ -48,8 +49,6 @@ public class FinishSuitController : MonoBehaviour
                     break;
             }
         }
-
-        
     }
 
     public void SuitDestruction(float currentHealth, float maxHealth)

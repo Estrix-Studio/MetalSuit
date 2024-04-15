@@ -9,10 +9,7 @@ public static class SavingManager
         var bf = new BinaryFormatter();
 
         // Checking if the file exists. If it does, it will delete it.
-        if (CheckSaveData())
-        {
-            ClearSaveData(path: Application.persistentDataPath + "/MySaveData.dat");
-        }
+        if (CheckSaveData()) ClearSaveData(Application.persistentDataPath + "/MySaveData.dat");
         var file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
 
         bf.Serialize(file, playerData);
@@ -26,10 +23,7 @@ public static class SavingManager
         var bf = new BinaryFormatter();
 
         // Checking if the file exists. If it does, it will delete it.
-        if (CheckSaveData())
-        {
-            ClearSaveData(path: Application.persistentDataPath + "/MySaveData.dat");
-        }
+        if (CheckSaveData()) ClearSaveData(Application.persistentDataPath + "/MySaveData.dat");
         var file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
 
         var playerData = new PlayerData();
@@ -74,7 +68,7 @@ public static class SavingManager
         Debug.Log("Save data already exists!");
         return true;
     }
-    
+
     private static bool ClearSaveData(string path)
     {
         if (File.Exists(Application.persistentDataPath + "/MySaveData.dat"))
@@ -83,10 +77,8 @@ public static class SavingManager
             Debug.Log("Data reset complete!");
             return true;
         }
-        else
-        {
-            Debug.LogError("No save data to delete.");
-            return false;
-        }
+
+        Debug.LogError("No save data to delete.");
+        return false;
     }
 }
