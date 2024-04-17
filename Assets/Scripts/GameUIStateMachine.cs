@@ -10,7 +10,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     private void Start()
     {
-        PlayerData = SavingManager.LoadGame();
+        //PlayerData = SavingManager.LoadGame();
         if (PlayerData == null) return;
         coinText.text = PlayerData.Coins.ToString();
         gemText.text = PlayerData.Gems.ToString();

@@ -4581,6 +4581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contactAction: {fileID: -3445644342706294981, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
   positionAction: {fileID: 65062594944116482, guid: 23ee4c4339f52f34d93eb3a2f015d8a0, type: 3}
+  playerMovement: {fileID: 0}
+  playerStatus: {fileID: 0}
 --- !u!114 &7453811231565923177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4637,6 +4639,10 @@ PrefabInstance:
     - target: {fileID: 2630978034346472359, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630978034346472359, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5424662772689845067, guid: 5e78d06a5fec66a468af73f6c98b3ade, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4736,7 +4742,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1777374592497608684}
   - {fileID: 963194228}
   - {fileID: 3034834418190126268}
   - {fileID: 211025747}
@@ -4746,3 +4751,4 @@ SceneRoots:
   - {fileID: 8742592730100121943}
   - {fileID: 1094288032}
   - {fileID: 4539670330772228873}
+  - {fileID: 1777374592497608684}

@@ -16,7 +16,11 @@ public class FinishSuitController : MonoBehaviour
     public void Start()
     {
         suitProgress = 0.0f;
-        _finishBarBaseScale = finishBar.transform.localScale;
+        if(finishBar)
+        {
+            _finishBarBaseScale = finishBar.transform.localScale;
+        }
+     
     }
 
     public void BuildSuit(float score)

@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private InputActionReference contactAction;
     [SerializeField] private InputActionReference positionAction;
-    private PlayerMovement playerMovement;
-    private PlayerStatus playerStatus;
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerStatus playerStatus;
 
     private void Start()
     {

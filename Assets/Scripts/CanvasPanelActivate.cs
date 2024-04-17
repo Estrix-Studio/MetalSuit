@@ -17,31 +17,9 @@ public class CanvasPanelActivate : MonoBehaviour
         SceneManager.LoadScene("InitScene");
     }
 
-    public void LoadScene(int levelIndex)
+    public void StartButton()
     {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
-    }
-
-    private IEnumerator LoadSceneAsynchronously(int levelIndex)
-    {
-        var operation = SceneManager.LoadSceneAsync(levelIndex);
-        operation.allowSceneActivation = false;
-
-        loadingScreen.SetActive(true);
-
-        while (!operation.isDone)
-        {
-            var progress = Mathf.Clamp01(operation.progress / 0.9f);
-            loadingBar.value = progress;
-
-            if (operation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(1f);
-                operation.allowSceneActivation = true;
-            }
-
-            yield return null;
-        }
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void TogglePanel(GameObject panel)
