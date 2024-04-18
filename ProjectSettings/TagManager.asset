@@ -14,6 +14,7 @@ TagManager:
   - Saw
   - Hammer
   - WinningPlatform
+  - Closing
   layers:
   - Default
   - TransparentFX

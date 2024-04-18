@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIStateMachine : MonoBehaviour
@@ -15,6 +16,8 @@ public class GameUIStateMachine : MonoBehaviour
         coinText.text = PlayerData.Coins.ToString();
         gemText.text = PlayerData.Gems.ToString();
         dataText.text = PlayerData.Data.ToString();
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
     }
 
     private void Update()
@@ -36,7 +39,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void ChangeToWinScreen()
     {
-        GamePause();
+        //GamePause();
 
         playScreen.SetActive(false);
         LoseScreen.SetActive(false);
@@ -46,7 +49,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     public void ChangeToLoseScreen()
     {
-        GamePause();
+        //GamePause();
         playScreen.SetActive(false);
         LoseScreen.SetActive(true);
         WinScreen.SetActive(false);
@@ -88,5 +91,10 @@ public class GameUIStateMachine : MonoBehaviour
     public void CloseProgram()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("InitScene");
     }
 }

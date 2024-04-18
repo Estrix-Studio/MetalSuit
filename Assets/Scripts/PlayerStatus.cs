@@ -8,13 +8,14 @@ public class PlayerStatus : MonoBehaviour
     private GameUIStateMachine gameUIStateMachine;
     private HealthBarController healthBarController;
     private PlayerMovement PlayerMovement;
-
+    PlayerController playerController;
 
     private void Start()
     {
         currentHealth = maxHealth;
         finishSuitController = GetComponent<FinishSuitController>();
         gameUIStateMachine = FindObjectOfType<GameUIStateMachine>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,6 +24,28 @@ public class PlayerStatus : MonoBehaviour
         var receivedDamage = 0;
         float receivedDuration = 0;
         float receivedForce = 0;
+        Debug.Log(collision.gameObject.tag);
+
+        if (collision.gameObject.tag == "Dual")
+        {
+            playerController.Animator.Play("Hit");
+            TakeDamage(10);
+        }
+        if (collision.gameObject.tag == "Saw")
+        {
+            playerController.Animator.Play("Dying");
+            TakeDamage(100);
+        }
+        if (collision.gameObject.tag == "Hammer")
+        {
+            playerController.Animator.Play("Hit");
+            TakeDamage(15);
+        }
+        if (collision.gameObject.tag == "Closing")
+        {
+            playerController.Animator.Play("Dying");
+            TakeDamage(100);
+        }
 
         if (PlayerMovement.GetIsDashing())
         {
@@ -79,6 +102,12 @@ public class PlayerStatus : MonoBehaviour
         {
             gameUIStateMachine.ChangeToWinScreen();
         }
+
+        if (other.gameObject.tag == "WinningPlatform")
+        {
+            playerController.Animator.Play("Dance");
+            gameUIStateMachine.ChangeToWinScreen();
+        }
     }
 
     public void Initialize()
@@ -102,6 +131,16 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth <= 0) Die();
 
         PlayerMovement.TakeDamage(damageSourcePosition, knockbackForce, knockbackDuration);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (currentHealth <= 0) return;
+        currentHealth -= damage;
+        healthBarController.Damage(damage);
+
+
+        if (currentHealth <= 0) Die();
     }
 
     public void Heal(int amount)

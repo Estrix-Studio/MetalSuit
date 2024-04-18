@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6355789597004929907}
   m_Layer: 0
   m_Name: Circle.008
-  m_TagString: Untagged
+  m_TagString: Dual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4318289311277024575}
   m_Layer: 0
   m_Name: polySurface19.001
-  m_TagString: Untagged
+  m_TagString: Dual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
