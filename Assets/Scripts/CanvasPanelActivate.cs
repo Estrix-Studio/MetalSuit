@@ -9,8 +9,8 @@ public class CanvasPanelActivate : MonoBehaviour
     public GameObject gemAndCoinPanel;
     public GameObject missionPanel;
     public GameObject skinsPanel;
-    public GameObject loadingScreen;
-    public Slider loadingBar;
+    public GameObject creditsScreen;
+    //public Slider loadingBar;
 
     public void LoadSceneByName(string sceneName)
     {
@@ -31,7 +31,15 @@ public class CanvasPanelActivate : MonoBehaviour
     {
         settingsPanel.SetActive(true);
     }
+    public void ToggleCreditsPanel()
+    {
+        creditsScreen.SetActive(true);
+    }
 
+    public void ToggleCreditsExitPanel()
+    {
+        creditsScreen.SetActive(false);
+    }
     public void ToggleSettingsExitPanel()
     {
         settingsPanel.SetActive(false);
