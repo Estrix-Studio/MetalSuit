@@ -9,6 +9,11 @@ TagManager:
   - Repair
   - Level
   - FinishLine
+  - Quad
+  - Dual
+  - Saw
+  - Hammer
+  - WinningPlatform
   layers:
   - Default
   - TransparentFX
