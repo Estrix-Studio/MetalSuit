@@ -12,12 +12,12 @@ public static class SaveManager
         // Checking if the file exists. If it does, it will delete it.
         if (CheckSaveData())
             ClearSaveData(Application.persistentDataPath + "/MySaveData.dat");
-        
+
         var file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
 
         bf.Serialize(file, playerData);
         file.Close();
-        
+
         PlayerPrefs.Save();
         Debug.Log("Game data saved!");
     }
@@ -34,9 +34,9 @@ public static class SaveManager
         var playerData = new PlayerData();
         bf.Serialize(file, playerData);
         file.Close();
-        
+
         PlayerPrefs.Save();
-        
+
         Debug.Log("Game data saved!");
     }
 

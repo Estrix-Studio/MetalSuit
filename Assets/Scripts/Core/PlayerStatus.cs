@@ -7,8 +7,8 @@ public class PlayerStatus : MonoBehaviour
     private FinishSuitController finishSuitController;
     private GameUIStateMachine gameUIStateMachine;
     private HealthBarController healthBarController;
-    private PlayerMovement PlayerMovement;
     private PlayerController playerController;
+    private PlayerMovement PlayerMovement;
 
     private void Start()
     {

@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
     }
-    
+
     // A function that handles Pause Button inside of the game scene
     private void SetPause(bool isPaused)
     {
@@ -25,7 +25,6 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         SetPause(true);
-        
     }
 
     public void ResumeGame()

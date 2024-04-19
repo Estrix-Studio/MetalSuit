@@ -90,7 +90,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private ProjectileBehavior GetAvailableProjectile() => _projectiles.FirstOrDefault(projectile => !projectile.gameObject.activeSelf);
+    private ProjectileBehavior GetAvailableProjectile()
+    {
+        return _projectiles.FirstOrDefault(projectile => !projectile.gameObject.activeSelf);
+    }
 
     public void TakeDamage(float damage)
     {
