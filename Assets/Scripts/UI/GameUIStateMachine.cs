@@ -11,7 +11,7 @@ public class GameUIStateMachine : MonoBehaviour
 
     private void Start()
     {
-        //PlayerData = SavingManager.LoadGame();
+        //PlayerData = SaveManager.LoadGame();
         if (PlayerData == null) return;
         coinText.text = PlayerData.Coins.ToString();
         gemText.text = PlayerData.Gems.ToString();
@@ -71,21 +71,21 @@ public class GameUIStateMachine : MonoBehaviour
     {
         PlayerData.Coins += 1;
         coinText.text = PlayerData.Coins.ToString();
-        SavingManager.SaveGame(PlayerData);
+        SaveManager.SaveGame(PlayerData);
     }
 
     public void IncrementGems()
     {
         PlayerData.Gems += 1;
         gemText.text = PlayerData.Gems.ToString();
-        SavingManager.SaveGame(PlayerData);
+        SaveManager.SaveGame(PlayerData);
     }
 
     public void IncrementData()
     {
         PlayerData.Data += 1;
         dataText.text = PlayerData.Data.ToString();
-        SavingManager.SaveGame(PlayerData);
+        SaveManager.SaveGame(PlayerData);
     }
 
     public void CloseProgram()

@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SaveButton()
     {
-        // Sending updated player data to the SavingManager
-        SavingManager.SaveGame();
+        // Sending updated player data to the SaveManager
+        SaveManager.SaveGame();
     }
 }

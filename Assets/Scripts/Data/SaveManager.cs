@@ -2,7 +2,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public static class SavingManager
+public static class SaveManager
 {
     public static void SaveGame(PlayerData playerData)
     {
