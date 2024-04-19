@@ -29,8 +29,8 @@ public class EdgeWallsGenerator : MonoBehaviour
                     // Create walls for each face of the object
                     CreateWallAtFace(child, bounds, Vector3.right, "Right", collider); // Right face
                     CreateWallAtFace(child, bounds, Vector3.left, "Left", collider); // Left face
-                    //CreateWallAtFace(child, bounds, Vector3.up, "Top", collider);        // Top face
-                    //CreateWallAtFace(child, bounds, Vector3.down, "Bottom", collider);   // Bottom face
+                    //CreateWallAtFace(child, bounds, Vector3.up, "Top", _collider);        // Top face
+                    //CreateWallAtFace(child, bounds, Vector3.down, "Bottom", _collider);   // Bottom face
                     CreateWallAtFace(child, bounds, Vector3.forward, "Front", collider); // Front face
                     CreateWallAtFace(child, bounds, Vector3.back, "Back", collider); // Back face
                 }
@@ -49,20 +49,24 @@ public class EdgeWallsGenerator : MonoBehaviour
         var canCreateWall = !Physics.CheckSphere(tempColliderCenter, offsetDistance);
 
 
-        if (!canCreateWall)
+        switch (canCreateWall)
         {
-            var colliders = Physics.OverlapSphere(tempColliderCenter, offsetDistance);
-            foreach (var col in colliders)
-                if (col != collider)
-                    Debug.Log("Collided with: " + col.name);
-        }
-
-        // If no obstructions, create the wall
-        if (canCreateWall)
-        {
-            // Create the wall at the original position
-            var wallPosition = faceCenter - faceDirection * offsetDistance + Vector3.up * bounds.extents.y;
-            CreateWall(wallPosition, faceDirection, bounds.size, wallThickness, child.name + "_" + faceName);
+            case false:
+            {
+                var colliders = Physics.OverlapSphere(tempColliderCenter, offsetDistance);
+                foreach (var col in colliders)
+                    if (col != collider)
+                        Debug.Log("Collided with: " + col.name);
+                break;
+            }
+            // If no obstructions, create the wall
+            case true:
+            {
+                // Create the wall at the original position
+                var wallPosition = faceCenter - faceDirection * offsetDistance + Vector3.up * bounds.extents.y;
+                CreateWall(wallPosition, faceDirection, bounds.size, wallThickness, child.name + "_" + faceName);
+                break;
+            }
         }
     }
 

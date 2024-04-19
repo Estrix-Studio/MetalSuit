@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +12,20 @@ public class CanvasPanelActivate : MonoBehaviour
     public GameObject missionPanel;
     public GameObject skinsPanel;
     public GameObject creditsScreen;
+
+    [SerializeField] public GameObject currentLevel;
     //public Slider loadingBar;
+
+    private void Awake()
+    {
+        SetLevelName();
+    }
+
+    public void SetLevelName()
+    {
+        currentLevel = GameObject.Find("CurrentLevel");
+        currentLevel.GetComponent<TMP_Text>().SetText("Level " + PlayerData.Level);
+    }
 
     public void LoadSceneByName(string sceneName)
     {
@@ -31,6 +46,7 @@ public class CanvasPanelActivate : MonoBehaviour
     {
         settingsPanel.SetActive(true);
     }
+
     public void ToggleCreditsPanel()
     {
         creditsScreen.SetActive(true);
@@ -40,6 +56,7 @@ public class CanvasPanelActivate : MonoBehaviour
     {
         creditsScreen.SetActive(false);
     }
+
     public void ToggleSettingsExitPanel()
     {
         settingsPanel.SetActive(false);

@@ -9,13 +9,12 @@ public class ObstacleMonitor : MonoBehaviour
     public GameObject[] obstaclesPrefabs;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        for (int i = 0; i < obstacleLocations.Length; i++)
+        foreach (var t in obstacleLocations)
         {
-            int randomObstacle = Random.Range(0, obstaclesPrefabs.Length);
-            Instantiate(obstaclesPrefabs[randomObstacle], obstacleLocations[i].position, obstacleLocations[i].rotation);
+            var randomObstacle = Random.Range(0, obstaclesPrefabs.Length);
+            Instantiate(obstaclesPrefabs[randomObstacle], t.position, t.rotation);
         }
     }
-
 }

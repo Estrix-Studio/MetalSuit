@@ -8,7 +8,7 @@ public class PlayerStatus : MonoBehaviour
     private GameUIStateMachine gameUIStateMachine;
     private HealthBarController healthBarController;
     private PlayerMovement PlayerMovement;
-    PlayerController playerController;
+    private PlayerController playerController;
 
     private void Start()
     {
@@ -31,16 +31,19 @@ public class PlayerStatus : MonoBehaviour
             playerController.Animator.Play("Hit");
             TakeDamage(10);
         }
+
         if (collision.gameObject.tag == "Saw")
         {
             playerController.Animator.Play("Dying");
             TakeDamage(100);
         }
+
         if (collision.gameObject.tag == "Hammer")
         {
             playerController.Animator.Play("Hit");
             TakeDamage(15);
         }
+
         if (collision.gameObject.tag == "Closing")
         {
             playerController.Animator.Play("Dying");

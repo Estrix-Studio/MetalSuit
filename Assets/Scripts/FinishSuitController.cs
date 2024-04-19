@@ -16,11 +16,7 @@ public class FinishSuitController : MonoBehaviour
     public void Start()
     {
         suitProgress = 0.0f;
-        if(finishBar)
-        {
-            _finishBarBaseScale = finishBar.transform.localScale;
-        }
-     
+        if (finishBar) _finishBarBaseScale = finishBar.transform.localScale;
     }
 
     public void BuildSuit(float score)
@@ -29,12 +25,12 @@ public class FinishSuitController : MonoBehaviour
 
         if (finishBar)
         {
-            var progresspercentage = requiredScore / suitProgress;
-            finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progresspercentage,
+            var progress = requiredScore / suitProgress;
+            finishBar.transform.localScale = new Vector3(_finishBarBaseScale.x * progress,
                 _finishBarBaseScale.y,
                 _finishBarBaseScale.z);
 
-            switch (progresspercentage)
+            switch (progress)
             {
                 case >= 1.0f:
                     finishSuitDecal.SetActive(true);
@@ -76,7 +72,7 @@ public class FinishSuitController : MonoBehaviour
         }
     }
 
-    public void DestroyPart(GameObject part)
+    private static void DestroyPart(GameObject part)
     {
         part.SetActive(false);
     }

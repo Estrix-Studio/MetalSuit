@@ -3,10 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool isPaused;
     public GameObject pauseMenu;
 
-    private void Start()
+    private void Awake()
     {
         pauseMenu.SetActive(false);
     }
@@ -15,29 +14,36 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
     }
+    
+    // A function that handles Pause Button inside of the game scene
+    private void SetPause(bool isPaused)
+    {
+        Time.timeScale = isPaused ? 0f : 1f;
+        pauseMenu.SetActive(isPaused);
+    }
 
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        SetPause(true);
+        
     }
 
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        SetPause(false);
     }
 
-    public void BackToMainMenu(string sceneName)
+    public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenuScreen");
+        var scene = SceneManager.GetSceneByName("MainMenuScreen");
+        SceneManager.LoadSceneAsync(scene.ToString());
+        SceneManager.SetActiveScene(scene);
+        SetPause(false);
     }
 
-    public void SaveButton_Pressed()
+    public void SaveButton()
     {
         // Sending updated player data to the SavingManager
-        SavingManager.SaveGame(GameUIStateMachine.PlayerData);
+        SavingManager.SaveGame();
     }
 }

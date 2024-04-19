@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Obstacle") 
+        if (other.gameObject.tag == "Obstacle")
             SoundManager.instance.PlayerSound(Sound.PlayerHit);
     }
 

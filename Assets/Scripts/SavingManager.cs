@@ -7,13 +7,18 @@ public static class SavingManager
     public static void SaveGame(PlayerData playerData)
     {
         var bf = new BinaryFormatter();
+        playerData = new PlayerData();
 
         // Checking if the file exists. If it does, it will delete it.
-        if (CheckSaveData()) ClearSaveData(Application.persistentDataPath + "/MySaveData.dat");
+        if (CheckSaveData())
+            ClearSaveData(Application.persistentDataPath + "/MySaveData.dat");
+        
         var file = File.Create(Application.persistentDataPath + "/MySaveData.dat");
 
         bf.Serialize(file, playerData);
         file.Close();
+        
+        PlayerPrefs.Save();
         Debug.Log("Game data saved!");
     }
 
@@ -29,6 +34,9 @@ public static class SavingManager
         var playerData = new PlayerData();
         bf.Serialize(file, playerData);
         file.Close();
+        
+        PlayerPrefs.Save();
+        
         Debug.Log("Game data saved!");
     }
 

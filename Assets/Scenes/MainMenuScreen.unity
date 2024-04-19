@@ -5191,6 +5191,7 @@ MonoBehaviour:
   missionPanel: {fileID: 1865238016}
   skinsPanel: {fileID: 926883177}
   creditsScreen: {fileID: 524556791}
+  currentLevel: {fileID: 1299900771}
 --- !u!1 &712337780
 GameObject:
   m_ObjectHideFlags: 0
@@ -10260,6 +10261,7 @@ MonoBehaviour:
   missionPanel: {fileID: 0}
   skinsPanel: {fileID: 0}
   creditsScreen: {fileID: 0}
+  currentLevel: {fileID: 0}
 --- !u!114 &1261256280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10801,7 +10803,7 @@ GameObject:
   - component: {fileID: 1299900774}
   - component: {fileID: 1299900773}
   m_Layer: 5
-  m_Name: Level1Text
+  m_Name: CurrentLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10846,10 +10848,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1
+  m_text: Level X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2850bcfd03c7aa04090159429699c84f, type: 2}
+  m_sharedMaterial: {fileID: 5260265212721669619, guid: 2850bcfd03c7aa04090159429699c84f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12963,6 +12965,7 @@ MonoBehaviour:
   missionPanel: {fileID: 0}
   skinsPanel: {fileID: 0}
   creditsScreen: {fileID: 0}
+  currentLevel: {fileID: 0}
 --- !u!1 &1605224779
 GameObject:
   m_ObjectHideFlags: 0
@@ -14500,7 +14503,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1744813531}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 704871441}
+        m_TargetAssemblyTypeName: CanvasPanelActivate, Assembly-CSharp
+        m_MethodName: SetLevelName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 123
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1744813533
 CanvasRenderer:
   m_ObjectHideFlags: 0
