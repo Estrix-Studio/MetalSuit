@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Obstacle
+  - Repair
+  - Level
+  - FinishLine
+  - Quad
+  - Dual
+  - Saw
+  - Hammer
+  - WinningPlatform
+  - Closing
   layers:
   - Default
   - TransparentFX
@@ -12,7 +22,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PlayerLayer
   - 
   - Ground
   - 
